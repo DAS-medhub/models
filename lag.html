@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Medical AI Models</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background-color: #f5f7fb;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: white;
+      color: rgb(39, 145, 39);
+      border-radius: 0 0 5px 5px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+    .logo img {
+      height: 42px;
+      margin-right: 40px;
+    }
+    .navbar {
+      background: linear-gradient(135deg, rgb(39, 145, 39) 0%, rgb(39, 145, 39) 100%);
+      color: white;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .container {
+      max-width: 1200px;
+      margin: 80px auto 2rem auto;
+      padding: 0 20px;
+    }
+    .search-bar {
+      width: 100%;
+      max-width: 500px;
+      margin: 20px auto;
+      position: relative;
+    }
+    .search-input {
+      width: 100%;
+      padding: 12px 20px;
+      border: 2px solid #e0e0e0;
+      border-radius: 25px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+    .search-input:focus {
+      outline: none;
+      border-color: rgb(39, 145, 39);
+      box-shadow: 0 0 8px rgba(30, 60, 114, 0.2);
+    }
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 20px 0;
+    }
+    .model-card {
+      background: white;
+      border-radius: 15px;
+      padding: 1.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .model-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    .model-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, rgb(39, 145, 39) 0%, rgb(55, 155, 55) 100%);
+    }
+    .model-icon {
+      font-size: 2rem;
+      color: rgb(39, 145, 39);
+      margin-bottom: 1rem;
+    }
+    .model-title {
+      color: rgb(39, 145, 39);
+      margin-bottom: 0.75rem;
+      font-size: 1.5rem;
+    }
+    .model-description {
+      color: #666;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+    .access-button {
+      background: linear-gradient(135deg, orange 0%, orange 100%);
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .access-button:hover {
+      transform: scale(1.05);
+    }
+    /* Iframe container styles */
+    #iframeContainer {
+      display: none;
+      position: relative;
+      margin-top: 80px;
+    }
+    #iframeContainer iframe {
+      width: 100%;
+      height: calc(100vh - 80px);
+      border: none;
+    }
+    #closeIframe {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 1100;
+      background: linear-gradient(135deg, orange 0%, orange 100%);
+      border: none;
+      padding: 8px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      color: white;
+      font-size: 1rem;
+    }
+    /* Auth styles */
+    .auth-buttons {
+      display: flex;
+      align-items: center;
+    }
+    .auth-buttons button {
+      background: linear-gradient(135deg, rgb(39, 145, 39) 0%, rgb(55, 155, 55) 100%);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-left: 10px;
+      transition: transform 0.2s ease;
+    }
+    .auth-buttons button:hover {
+      transform: scale(1.05);
+    }
+    .auth-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+    .auth-form {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      width: 320px;
+      position: relative;
+    }
+    .auth-form h2 {
+      margin-bottom: 20px;
+      color: rgb(39, 145, 39);
+      text-align: center;
+    }
+    .auth-form input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border-color 0.3s ease;
+    }
+    .auth-form input:focus {
+      outline: none;
+      border-color: rgb(39, 145, 39);
+    }
+    .auth-form button {
+      background: linear-gradient(135deg, rgb(39, 145, 39) 0%, rgb(55, 155, 55) 100%);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      margin-top: 5px;
+      transition: transform 0.2s ease;
+    }
+    .auth-form button:hover {
+      transform: scale(1.02);
+    }
+    .auth-form p {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+    }
+    .auth-form a {
+      color: rgb(39, 145, 39);
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .close-auth {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 20px;
+      color: #999;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+    .close-auth:hover {
+      color: rgb(39, 145, 39);
+    }
+    /* Profile icon styles */
+    .profile-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgb(39, 145, 39) 0%, rgb(55, 155, 55) 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      margin-right: 12px;
+      font-size: 16px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: none;
+      cursor: pointer;
+    }
+     
+    .dropdown-content a {
+      color: #555;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      transition: background-color 0.2s;
+    }
+    .dropdown-content a:hover {
+      background-color: #f5f5f5;
+    }
+    .user-dropdown:hover .dropdown-content {
+      display: block;
+    }
+   
+
+/* And add these styles */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 45px;
+  background-color: white;
+  min-width: 180px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  z-index: 1;
+  cursor: pointer;
+  /* Add a subtle transition for smoother appearance */
+  transition: opacity 0.2s ease;
+}
+
+/* Add a small arrow/triangle pointing to the profile icon */
+.dropdown-content::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: 12px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid white;
+}
+    @media (max-width: 768px) {
+      .cards-container {
+        grid-template-columns: 1fr;
+      }
+      .auth-form {
+        width: 90%;
+        max-width: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="images/dasmedhub-logo.png" alt="DAS Medhub Logo" />
+    </div>
+    <div class="auth-buttons">
+      <!-- Profile icon for logged in users -->
+      <div class="user-dropdown">
+        <div class="profile-icon" id="profile-icon"></div>
+        <div class="dropdown-content">
+          <a href="#" id="account-link">My Account</a>
+          <a href="#" id="logout-link">Logout</a>
+        </div>
+      </div>
+      <button id="login-button">Login</button>
+      <button id="signup-button">Sign Up</button>
+    </div>
+  </header>
+
+  <!-- Auth Modal -->
+  <div class="auth-modal" id="auth-modal">
+    <!-- Login Form -->
+    <div class="auth-form" id="login-form">
+      <span class="close-auth">&times;</span>
+      <h2>Login</h2>
+      <input type="email" id="login-email" placeholder="Email" required>
+      <input type="password" id="login-password" placeholder="Password" required>
+      <button id="login-submit">Login</button>
+      <p>Don't have an account? <a href="#" id="switch-to-signup">Sign Up</a></p>
+    </div>
+
+    <!-- Signup Form -->
+    <div class="auth-form" id="signup-form" style="display: none;">
+      <span class="close-auth">&times;</span>
+      <h2>Sign Up</h2>
+      <input type="email" id="signup-email" placeholder="Email" required>
+      <input type="password" id="signup-password" placeholder="Password" required>
+      <button id="signup-submit">Sign Up</button>
+      <p>Already have an account? <a href="#" id="switch-to-login">Login</a></p>
+    </div>
+  </div>
+
+  <!-- Main content container for search and cards -->
+  <div class="container" id="cardsContainer">
+    <div class="search-bar">
+      <input type="text" class="search-input" placeholder="Search models..." />
+    </div>
+     <div class="cards-container">
+      <!-- Diabetes Model Card -->
+      <div class="model-card" data-model="diabetes">
+        <i class="fas fa-syringe model-icon"></i>
+        <h2 class="model-title">Diabetes Prediction</h2>
+        <p class="model-description">
+          Advanced machine learning model for early diabetes detection using clinical parameters.
+        </p>
+        <button class="access-button">Access Model</button>
+      </div>
+       <!-- Diabetes large Model Card -->
+      <div class="model-card" data-model="dialarge">
+        <i class="fa-solid fa-shield-virus model-icon"></i>
+        <h2 class="model-title">Diabetes large Prediction</h2>
+        <p class="model-description">
+          Advanced machine learning model for early diabetes detection using over 40 clinical parameters.
+        </p>
+        <button class="access-button">Access Model</button>
+      </div>
+       <!-- Diabetes 18 feature Model Card -->
+      <div class="model-card" data-model="dia18">
+        <i class="fa-solid fa-virus-covid model-icon"></i>
+        <h2 class="model-title">Diabetes 18 features model</h2>
+        <p class="model-description">
+          Advanced machine learning model for early diabetes detection using 18 clinical and demographical parameters.
+        </p>
+        <button class="access-button">Access Model</button>
+      </div>
+      <!-- Cancer Model Card -->
+      <div class="model-card" data-model="cancer">
+        <i class="fas fa-dna model-icon"></i>
+        <h2 class="model-title">Multi-Cancer Detection</h2>
+        <p class="model-description">
+          Deep learning model for early detection of 26 different cancer types from medical imaging.
+        </p>
+        <button class="access-button">Access Model</button>
+      </div>
+      <!-- Tuberculosis Model Card -->
+      <div class="model-card" data-model="tuberculosis">
+        <i class="fas fa-lungs model-icon"></i>
+        <h2 class="model-title">Tuberculosis Detection</h2>
+        <p class="model-description">
+          CNN-based model for tuberculosis identification from chest X-ray images.
+        </p>
+        <button class="access-button">Access Model</button>
+      </div>
+      <!-- Pneumonia Model Card -->
+      <div class="model-card" data-model="pneumonia">
+        <i class="fas fa-virus model-icon"></i>
+        <h2 class="model-title">Pneumonia Detection</h2>
+        <p class="model-description">
+          Deep neural network for pneumonia detection in chest radiographs.
+        </p>
+        <button class="access-button">Access Model</button>
+      </div>
+      <!-- Heart Disease Model Card -->
+      <div class="model-card" data-model="heart">
+        <i class="fas fa-heartbeat model-icon"></i>
+        <h2 class="model-title">Heart Disease Prediction</h2>
+        <p class="model-description">
+          Predict cardiovascular diseases using patient health metrics and lifestyle factors.
+        </p>
+        <button class="access-button">Access Model</button>
+      </div>
+      <!-- Breast Cancer Model Card -->
+      <div class="model-card" data-model="breast">
+        <i class="fas fa-ribbon model-icon"></i>
+        <h2 class="model-title">Breast Cancer Detection</h2>
+        <p class="model-description">
+          Predict whether a breast is malignant or benign using patient health metrics and lifestyle factors.
+        </p>
+        <button class="access-button">Access Model</button>
+      </div>
+      <!-- Malaria Model Card -->
+      <div class="model-card" data-model="malaria">
+        <i class="fas fa-disease model-icon"></i>
+        <h2 class="model-title">Malaria Detection</h2>
+        <p class="model-description">
+          Deep neural network for malaria detection from blood smear images.
+        </p>
+        <button class="access-button">Access Model</button>
+      </div>
+      <!-- Add more model cards following the same structure -->
+    </div>
+  </div>
+
+  <!-- Iframe container for loading model URLs -->
+  <div id="iframeContainer">
+    <button id="closeIframe">Close</button>
+    <iframe id="modelFrame"></iframe>
+  </div>
+
+  <!-- Firebase Scripts -->
+  <script type="module">
+   // Import Firebase SDKs
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+
+// Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBkAcHTfPVGzaR-aCJ6SdWIa8Z-I2nZHHA",
+  authDomain: "das-medhub.firebaseapp.com",
+  projectId: "das-medhub",
+  storageBucket: "das-medhub.firebasestorage.app",
+  messagingSenderId: "187749903773",
+  appId: "1:187749903773:web:aff296fab3e11513019374",
+  measurementId: "G-K3HRBYDYK9"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// UI Elements
+const authModal = document.getElementById("auth-modal");
+const loginForm = document.getElementById("login-form");
+const signupForm = document.getElementById("signup-form");
+const loginButton = document.getElementById("login-button");
+const signupButton = document.getElementById("signup-button");
+const userDropdown = document.querySelector(".user-dropdown");
+const profileIcon = document.getElementById("profile-icon");
+const logoutLink = document.getElementById("logout-link");
+const closeButtons = document.querySelectorAll(".close-auth");
+
+// Define model URLs
+const modelUrls = {
+  diabetes: 'https://sebukpor.github.io/Diabetes-classification/',
+  cancer: 'https://sebukpor.github.io/multi-cancer-classification/',
+  tuberculosis: 'https://sebukpor.github.io/tuberculosis_classification/',
+  pneumonia: 'https://sebukpor.github.io/pneumonia/',
+  heart: 'https://sebukpor.github.io/heart-diseases-prediction/',
+  breast: 'https://sebukpor.github.io/breast-cancer-classification/',
+  malaria: 'https://sebukpor.github.io/malaria-classification/',
+  dialarge: 'https://sebukpor.github.io/Diabetes-large-input/',
+  dia18: 'https://sebukpor.github.io/diabetes-18/'
+  // Add more model URLs if needed
+};
+
+// Function to load a model in the iframe and update the URL hash
+function loadModel(model) {
+  const modelUrl = modelUrls[model];
+  if (modelUrl) {
+    // Update the URL hash
+    window.location.hash = model;
+    // Hide the cards container and show the iframe container
+    document.getElementById('cardsContainer').style.display = 'none';
+    document.getElementById('iframeContainer').style.display = 'block';
+    document.getElementById('modelFrame').src = modelUrl;
+  }
+}
+
+// Show Login Modal
+loginButton.addEventListener("click", () => {
+  authModal.style.display = "flex";
+  loginForm.style.display = "block";
+  signupForm.style.display = "none";
+});
+
+// Show Signup Modal
+signupButton.addEventListener("click", () => {
+  authModal.style.display = "flex";
+  signupForm.style.display = "block";
+  loginForm.style.display = "none";
+});
+
+// Close Modal
+closeButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    authModal.style.display = "none";
+  });
+});
+
+// Close Modal when clicking outside
+window.addEventListener("click", (event) => {
+  if (event.target === authModal) {
+    authModal.style.display = "none";
+  }
+});
+
+// Switch between forms
+document.getElementById("switch-to-signup").addEventListener("click", (e) => {
+  e.preventDefault();
+  loginForm.style.display = "none";
+  signupForm.style.display = "block";
+});
+
+document.getElementById("switch-to-login").addEventListener("click", (e) => {
+  e.preventDefault();
+  signupForm.style.display = "none";
+  loginForm.style.display = "block";
+});
+
+// Function to get the first character of the email
+function getInitial(email) {
+  return email.charAt(0).toUpperCase();
+}
+
+// Add click event listeners to all model cards with authentication check
+document.querySelectorAll('.model-card').forEach(card => {
+  card.addEventListener('click', function() {
+    const model = this.dataset.model;
+    
+    // Check if user is authenticated
+    const user = auth.currentUser;
+    
+    if (user) {
+      // User is signed in, allow access to the model
+      loadModel(model);
+    } else {
+      // User is not signed in, show login modal
+      authModal.style.display = "flex";
+      loginForm.style.display = "block";
+      signupForm.style.display = "none";
+      
+      // Store the requested model in a data attribute for use after login
+      authModal.dataset.requestedModel = model;
+      
+      // Show a message to the user
+      alert("Please log in to access this model");
+    }
+  });
+});
+
+// Close button event listener to return to the model cards view
+document.getElementById('closeIframe').addEventListener('click', function() {
+  // Hide the iframe container and show the cards container
+  document.getElementById('iframeContainer').style.display = 'none';
+  document.getElementById('cardsContainer').style.display = 'block';
+  // Reset the URL hash
+  history.pushState("", document.title, window.location.pathname + window.location.search);
+});
+
+// Login form submission
+document.getElementById("login-submit").addEventListener("click", async () => {
+  const email = document.getElementById("login-email").value;
+  const password = document.getElementById("login-password").value;
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    authModal.style.display = "none";
+    
+    // Check if the user was trying to access a specific model
+    const requestedModel = authModal.dataset.requestedModel;
+    if (requestedModel) {
+      loadModel(requestedModel);
+      // Clear the stored model
+      delete authModal.dataset.requestedModel;
+    } else {
+      alert("Logged in successfully!");
+    }
+  } catch (error) {
+    alert(error.message);
+  }
+});
+
+// Signup form submission
+document.getElementById("signup-submit").addEventListener("click", async () => {
+  const email = document.getElementById("signup-email").value;
+  const password = document.getElementById("signup-password").value;
+
+  try {
+    await createUserWithEmailAndPassword(auth, email, password);
+    authModal.style.display = "none";
+    
+    // Check if the user was trying to access a specific model
+    const requestedModel = authModal.dataset.requestedModel;
+    if (requestedModel) {
+      loadModel(requestedModel);
+      // Clear the stored model
+      delete authModal.dataset.requestedModel;
+    } else {
+      alert("Account created successfully!");
+    }
+  } catch (error) {
+    alert(error.message);
+  }
+});
+
+// Logout
+logoutLink.addEventListener("click", async (e) => {
+  e.preventDefault();
+  try {
+    await signOut(auth);
+    alert("Logged out successfully!");
+  } catch (error) {
+    alert(error.message);
+  }
+});
+
+// Account Link (placeholder)
+document.getElementById("account-link").addEventListener("click", (e) => {
+  e.preventDefault();
+  alert("Account management features will be available soon!");
+});
+
+// Auth state observer
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in
+    loginButton.style.display = "none";
+    signupButton.style.display = "none";
+    userDropdown.style.display = "block";
+    profileIcon.style.display = "flex";
+    
+    // Set the profile icon initial from email
+    profileIcon.textContent = getInitial(user.email);
+    
+    // Set a tooltip with the email
+    profileIcon.title = user.email;
+  } else {
+    // User is signed out
+    loginButton.style.display = "inline-block";
+    signupButton.style.display = "inline-block";
+    userDropdown.style.display = "none";
+    profileIcon.style.display = "none";
+  }
+});
+
+// On page load, check if a hash exists and load the corresponding model (only if authenticated)
+window.addEventListener('load', function() {
+  const hash = window.location.hash.substring(1);
+  if (hash && modelUrls[hash]) {
+    // Check if user is authenticated before loading model
+    const user = auth.currentUser;
+    if (user) {
+      loadModel(hash);
+    } else {
+      // Store the requested model and show login
+      authModal.dataset.requestedModel = hash;
+      authModal.style.display = "flex";
+      loginForm.style.display = "block";
+      signupForm.style.display = "none";
+      alert("Please log in to access this model");
+    }
+  }
+});
+
+// Search functionality
+const searchInput = document.querySelector('.search-input');
+searchInput.addEventListener('input', function(e) {
+  const searchTerm = e.target.value.toLowerCase();
+  document.querySelectorAll('.model-card').forEach(card => {
+    const title = card.querySelector('.model-title').textContent.toLowerCase();
+    const description = card.querySelector('.model-description').textContent.toLowerCase();
+    if (title.includes(searchTerm) || description.includes(searchTerm)) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+});
+  </script>
+</body>
+</html>
