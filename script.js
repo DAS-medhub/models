@@ -1,13 +1,21 @@
-  // Import Firebase SDKs
+// Import Firebase SDKs
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+import { 
+  getAuth, 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword, 
+  signOut, 
+  onAuthStateChanged,
+  setPersistence,
+  browserLocalPersistence
+} from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 
 // Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBkAcHTfPVGzaR-aCJ6SdWIa8Z-I2nZHHA",
   authDomain: "das-medhub.firebaseapp.com",
   projectId: "das-medhub",
-  storageBucket: "das-medhub.firebasestorage.app",
+  storageBucket: "das-medhub.appspot.com",
   messagingSenderId: "187749903773",
   appId: "1:187749903773:web:aff296fab3e11513019374",
   measurementId: "G-K3HRBYDYK9"
@@ -16,6 +24,12 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+
+// Set persistence to local
+setPersistence(auth, browserLocalPersistence)
+  .catch((error) => {
+    console.error("Error setting persistence:", error);
+  });
 
 // UI Elements
 const authModal = document.getElementById("auth-modal");
@@ -39,7 +53,6 @@ const modelUrls = {
   malaria: 'https://sebukpor.github.io/malaria-classification/',
   dialarge: 'https://sebukpor.github.io/Diabetes-large-input/',
   dia18: 'https://sebukpor.github.io/diabetes-18/'
-  // Add more model URLs if needed
 };
 
 // Function to load a model in the iframe and update the URL hash
@@ -137,7 +150,8 @@ document.getElementById('closeIframe').addEventListener('click', function() {
 });
 
 // Login form submission
-document.getElementById("login-submit").addEventListener("click", async () => {
+document.getElementById("login-submit").addEventListener("click", async (e) => {
+  e.preventDefault();
   const email = document.getElementById("login-email").value;
   const password = document.getElementById("login-password").value;
 
@@ -145,14 +159,16 @@ document.getElementById("login-submit").addEventListener("click", async () => {
     await signInWithEmailAndPassword(auth, email, password);
     authModal.style.display = "none";
     
+    // Clear form fields
+    document.getElementById("login-email").value = "";
+    document.getElementById("login-password").value = "";
+    
     // Check if the user was trying to access a specific model
     const requestedModel = authModal.dataset.requestedModel;
     if (requestedModel) {
       loadModel(requestedModel);
       // Clear the stored model
       delete authModal.dataset.requestedModel;
-    } else {
-      alert("Logged in successfully!");
     }
   } catch (error) {
     alert(error.message);
@@ -160,13 +176,18 @@ document.getElementById("login-submit").addEventListener("click", async () => {
 });
 
 // Signup form submission
-document.getElementById("signup-submit").addEventListener("click", async () => {
+document.getElementById("signup-submit").addEventListener("click", async (e) => {
+  e.preventDefault();
   const email = document.getElementById("signup-email").value;
   const password = document.getElementById("signup-password").value;
 
   try {
     await createUserWithEmailAndPassword(auth, email, password);
     authModal.style.display = "none";
+    
+    // Clear form fields
+    document.getElementById("signup-email").value = "";
+    document.getElementById("signup-password").value = "";
     
     // Check if the user was trying to access a specific model
     const requestedModel = authModal.dataset.requestedModel;
@@ -187,6 +208,11 @@ logoutLink.addEventListener("click", async (e) => {
   e.preventDefault();
   try {
     await signOut(auth);
+    // Return to cards view if on a model
+    document.getElementById('iframeContainer').style.display = 'none';
+    document.getElementById('cardsContainer').style.display = 'block';
+    // Reset URL hash
+    history.pushState("", document.title, window.location.pathname + window.location.search);
     alert("Logged out successfully!");
   } catch (error) {
     alert(error.message);
@@ -213,31 +239,18 @@ onAuthStateChanged(auth, (user) => {
     
     // Set a tooltip with the email
     profileIcon.title = user.email;
+
+    // Check if there's a hash in the URL for a model to load
+    const hash = window.location.hash.substring(1);
+    if (hash && modelUrls[hash]) {
+      loadModel(hash);
+    }
   } else {
     // User is signed out
     loginButton.style.display = "inline-block";
     signupButton.style.display = "inline-block";
     userDropdown.style.display = "none";
     profileIcon.style.display = "none";
-  }
-});
-
-// On page load, check if a hash exists and load the corresponding model (only if authenticated)
-window.addEventListener('load', function() {
-  const hash = window.location.hash.substring(1);
-  if (hash && modelUrls[hash]) {
-    // Check if user is authenticated before loading model
-    const user = auth.currentUser;
-    if (user) {
-      loadModel(hash);
-    } else {
-      // Store the requested model and show login
-      authModal.dataset.requestedModel = hash;
-      authModal.style.display = "flex";
-      loginForm.style.display = "block";
-      signupForm.style.display = "none";
-      alert("Please log in to access this model");
-    }
   }
 });
 
@@ -255,3 +268,23 @@ searchInput.addEventListener('input', function(e) {
     }
   });
 });
+
+// Initialize the app based on current auth state and URL hash
+function initializeAppState() {
+  const user = auth.currentUser;
+  const hash = window.location.hash.substring(1);
+
+  if (user && hash && modelUrls[hash]) {
+    loadModel(hash);
+  } else if (!user && hash && modelUrls[hash]) {
+    // User not logged in but trying to access a model directly
+    authModal.dataset.requestedModel = hash;
+    authModal.style.display = "flex";
+    loginForm.style.display = "block";
+    signupForm.style.display = "none";
+    alert("Please log in to access this model");
+  }
+}
+
+// Run initialization when DOM is fully loaded
+document.addEventListener('DOMContentLoaded', initializeAppState);
