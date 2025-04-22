@@ -7,7 +7,8 @@ import {
   signOut, 
   onAuthStateChanged,
   setPersistence,
-  browserLocalPersistence
+  browserLocalPersistence,
+  browserSessionPersistence
 } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 
 // Firebase configuration
@@ -55,16 +56,31 @@ const modelUrls = {
   dia18: 'https://sebukpor.github.io/diabetes-18/'
 };
 
+// Track current model
+let currentModel = null;
+
 // Function to load a model in the iframe and update the URL hash
 function loadModel(model) {
   const modelUrl = modelUrls[model];
   if (modelUrl) {
+    currentModel = model;
     // Update the URL hash
     window.location.hash = model;
     // Hide the cards container and show the iframe container
     document.getElementById('cardsContainer').style.display = 'none';
     document.getElementById('iframeContainer').style.display = 'block';
     document.getElementById('modelFrame').src = modelUrl;
+    
+    // Store the current model in session storage
+    sessionStorage.setItem('currentModel', model);
+  }
+}
+
+// Function to restore model view from session storage
+function restoreModelView() {
+  const model = sessionStorage.getItem('currentModel');
+  if (model && modelUrls[model]) {
+    loadModel(model);
   }
 }
 
@@ -147,6 +163,9 @@ document.getElementById('closeIframe').addEventListener('click', function() {
   document.getElementById('cardsContainer').style.display = 'block';
   // Reset the URL hash
   history.pushState("", document.title, window.location.pathname + window.location.search);
+  // Clear current model from session storage
+  sessionStorage.removeItem('currentModel');
+  currentModel = null;
 });
 
 // Login form submission
@@ -213,6 +232,9 @@ logoutLink.addEventListener("click", async (e) => {
     document.getElementById('cardsContainer').style.display = 'block';
     // Reset URL hash
     history.pushState("", document.title, window.location.pathname + window.location.search);
+    // Clear current model from session storage
+    sessionStorage.removeItem('currentModel');
+    currentModel = null;
     alert("Logged out successfully!");
   } catch (error) {
     alert(error.message);
@@ -240,17 +262,24 @@ onAuthStateChanged(auth, (user) => {
     // Set a tooltip with the email
     profileIcon.title = user.email;
 
-    // Check if there's a hash in the URL for a model to load
-    const hash = window.location.hash.substring(1);
-    if (hash && modelUrls[hash]) {
-      loadModel(hash);
-    }
+    // Restore the model view if there was one
+    restoreModelView();
   } else {
     // User is signed out
     loginButton.style.display = "inline-block";
     signupButton.style.display = "inline-block";
     userDropdown.style.display = "none";
     profileIcon.style.display = "none";
+    
+    // Check if there's a model in the URL hash
+    const hash = window.location.hash.substring(1);
+    if (hash && modelUrls[hash]) {
+      authModal.dataset.requestedModel = hash;
+      authModal.style.display = "flex";
+      loginForm.style.display = "block";
+      signupForm.style.display = "none";
+      alert("Please log in to access this model");
+    }
   }
 });
 
@@ -269,22 +298,13 @@ searchInput.addEventListener('input', function(e) {
   });
 });
 
-// Initialize the app based on current auth state and URL hash
-function initializeAppState() {
-  const user = auth.currentUser;
+// Initialize the app when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  // Check URL hash first
   const hash = window.location.hash.substring(1);
-
-  if (user && hash && modelUrls[hash]) {
-    loadModel(hash);
-  } else if (!user && hash && modelUrls[hash]) {
-    // User not logged in but trying to access a model directly
-    authModal.dataset.requestedModel = hash;
-    authModal.style.display = "flex";
-    loginForm.style.display = "block";
-    signupForm.style.display = "none";
-    alert("Please log in to access this model");
-  }
-}
-
-// Run initialization when DOM is fully loaded
-document.addEventListener('DOMContentLoaded', initializeAppState);
+  
+  // Then let the auth state observer handle the rest
+  // It will either:
+  // 1. Restore the model view if user is logged in
+  // 2. Show login prompt if user is not logged in but trying to access a model
+});
