@@ -26,7 +26,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// Set persistence to local
+// Set persistence to local (this keeps users logged in across page refreshes)
 setPersistence(auth, browserLocalPersistence)
   .catch((error) => {
     console.error("Error setting persistence:", error);
@@ -71,14 +71,14 @@ function loadModel(model) {
     document.getElementById('iframeContainer').style.display = 'block';
     document.getElementById('modelFrame').src = modelUrl;
     
-    // Store the current model in session storage
-    sessionStorage.setItem('currentModel', model);
+    // Store the current model in localStorage (persists across sessions)
+    localStorage.setItem('currentModel', model);
   }
 }
 
-// Function to restore model view from session storage
+// Function to restore model view from storage
 function restoreModelView() {
-  const model = sessionStorage.getItem('currentModel');
+  const model = localStorage.getItem('currentModel');
   if (model && modelUrls[model]) {
     loadModel(model);
   }
@@ -147,8 +147,8 @@ document.querySelectorAll('.model-card').forEach(card => {
       loginForm.style.display = "block";
       signupForm.style.display = "none";
       
-      // Store the requested model in a data attribute for use after login
-      authModal.dataset.requestedModel = model;
+      // Store the requested model in localStorage
+      localStorage.setItem('requestedModel', model);
       
       // Show a message to the user
       alert("Please log in to access this model");
@@ -163,8 +163,8 @@ document.getElementById('closeIframe').addEventListener('click', function() {
   document.getElementById('cardsContainer').style.display = 'block';
   // Reset the URL hash
   history.pushState("", document.title, window.location.pathname + window.location.search);
-  // Clear current model from session storage
-  sessionStorage.removeItem('currentModel');
+  // Clear current model from localStorage
+  localStorage.removeItem('currentModel');
   currentModel = null;
 });
 
@@ -182,12 +182,12 @@ document.getElementById("login-submit").addEventListener("click", async (e) => {
     document.getElementById("login-email").value = "";
     document.getElementById("login-password").value = "";
     
-    // Check if the user was trying to access a specific model
-    const requestedModel = authModal.dataset.requestedModel;
+    // Check if there was a requested model stored
+    const requestedModel = localStorage.getItem('requestedModel');
     if (requestedModel) {
       loadModel(requestedModel);
-      // Clear the stored model
-      delete authModal.dataset.requestedModel;
+      // Clear the stored requested model
+      localStorage.removeItem('requestedModel');
     }
   } catch (error) {
     alert(error.message);
@@ -208,12 +208,12 @@ document.getElementById("signup-submit").addEventListener("click", async (e) => 
     document.getElementById("signup-email").value = "";
     document.getElementById("signup-password").value = "";
     
-    // Check if the user was trying to access a specific model
-    const requestedModel = authModal.dataset.requestedModel;
+    // Check if there was a requested model stored
+    const requestedModel = localStorage.getItem('requestedModel');
     if (requestedModel) {
       loadModel(requestedModel);
-      // Clear the stored model
-      delete authModal.dataset.requestedModel;
+      // Clear the stored requested model
+      localStorage.removeItem('requestedModel');
     } else {
       alert("Account created successfully!");
     }
@@ -232,8 +232,8 @@ logoutLink.addEventListener("click", async (e) => {
     document.getElementById('cardsContainer').style.display = 'block';
     // Reset URL hash
     history.pushState("", document.title, window.location.pathname + window.location.search);
-    // Clear current model from session storage
-    sessionStorage.removeItem('currentModel');
+    // Clear current model from storage
+    localStorage.removeItem('currentModel');
     currentModel = null;
     alert("Logged out successfully!");
   } catch (error) {
@@ -262,8 +262,15 @@ onAuthStateChanged(auth, (user) => {
     // Set a tooltip with the email
     profileIcon.title = user.email;
 
-    // Restore the model view if there was one
-    restoreModelView();
+    // Check URL hash first (highest priority)
+    const hash = window.location.hash.substring(1);
+    if (hash && modelUrls[hash]) {
+      loadModel(hash);
+    } 
+    // Then check localStorage for current model
+    else {
+      restoreModelView();
+    }
   } else {
     // User is signed out
     loginButton.style.display = "inline-block";
@@ -274,7 +281,7 @@ onAuthStateChanged(auth, (user) => {
     // Check if there's a model in the URL hash
     const hash = window.location.hash.substring(1);
     if (hash && modelUrls[hash]) {
-      authModal.dataset.requestedModel = hash;
+      localStorage.setItem('requestedModel', hash);
       authModal.style.display = "flex";
       loginForm.style.display = "block";
       signupForm.style.display = "none";
@@ -300,11 +307,5 @@ searchInput.addEventListener('input', function(e) {
 
 // Initialize the app when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  // Check URL hash first
-  const hash = window.location.hash.substring(1);
-  
-  // Then let the auth state observer handle the rest
-  // It will either:
-  // 1. Restore the model view if user is logged in
-  // 2. Show login prompt if user is not logged in but trying to access a model
+  // The auth state observer will handle everything
 });
