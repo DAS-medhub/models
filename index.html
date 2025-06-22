@@ -32,8 +32,8 @@
     
     /* Model-specific colors */
     .model-card[data-model="diabetes"] {
-      --model-color: #4CAF50;
-      --model-color-light: #81C784;
+      --model-color: #2E7D32;
+      --model-color-light: #66BB6A;
     }
     
     .model-card[data-model="dialarge"] {
@@ -42,38 +42,38 @@
     }
     
     .model-card[data-model="dia18"] {
-      --model-color: #1B5E20;
-      --model-color-light: #43A047;
+      --model-color: #2E7D32;
+      --model-color-light: #66BB6A;
     }
     
     .model-card[data-model="cancer"] {
-      --model-color: #9C27B0;
-      --model-color-light: #BA68C8;
+     --model-color: #2E7D32;
+      --model-color-light: #66BB6A;
     }
     
     .model-card[data-model="tuberculosis"] {
-      --model-color: #FF9800;
-      --model-color-light: #FFB74D;
+      --model-color: #2E7D32;
+      --model-color-light: #66BB6A;
     }
     
     .model-card[data-model="pneumonia"] {
-      --model-color: #F44336;
-      --model-color-light: #E57373;
+      --model-color: #2E7D32;
+      --model-color-light: #66BB6A;
     }
     
     .model-card[data-model="heart"] {
-      --model-color: #E91E63;
-      --model-color-light: #F06292;
+      --model-color: #2E7D32;
+      --model-color-light: #66BB6A;
     }
     
     .model-card[data-model="breast"] {
-      --model-color: #9C27B0;
-      --model-color-light: #BA68C8;
+     --model-color: #2E7D32;
+      --model-color-light: #66BB6A;
     }
     
     .model-card[data-model="malaria"] {
-      --model-color: #3F51B5;
-      --model-color-light: #7986CB;
+     --model-color: #2E7D32;
+      --model-color-light: #66BB6A;
     }
     
     .model-icon {
@@ -318,19 +318,20 @@
           <p>This model uses 8 carefully selected clinical and demographic parameters to predict the likelihood of diabetes with high accuracy. It's designed for quick screening in primary care settings.</p>
           
           <ul class="features-list">
-            <li><strong>Age:</strong> Considers age-related risk factors</li>
-            <li><strong>BMI:</strong> Body Mass Index assessment</li>
-            <li><strong>Glucose level:</strong> Fasting plasma glucose</li>
-            <li><strong>Blood pressure:</strong> Diastolic and systolic</li>
-            <li><strong>Skin thickness:</strong> Triceps skin fold thickness</li>
-            <li><strong>Insulin level:</strong> 2-Hour serum insulin</li>
-            <li><strong>Diabetes pedigree function:</strong> Family history likelihood</li>
-            <li><strong>Pregnancies:</strong> For female patients</li>
-          </ul>
+  <li><strong>Age:</strong> Age of the patient, considered as a risk factor</li>
+  <li><strong>BMI:</strong> Body Mass Index — a measure of body fat based on height and weight</li>
+  <li><strong>Glucose level:</strong> Fasting blood glucose concentration (mg/dL)</li>
+  <li><strong>Blood pressure:</strong> Includes both systolic and diastolic pressure (mm Hg)</li>
+  <li><strong>Heart disease:</strong> Indicates presence or absence of cardiovascular conditions</li>
+  <li><strong>Gender:</strong> Biological sex of the patient (Male or Female)</li>
+  <li><strong>HbA1c:</strong> Glycated hemoglobin level — reflects average blood sugar over 2–3 months</li>
+  <li><strong>Smoking history:</strong> Smoking status of the patient (e.g., never, former, current)</li>
+</ul>
+
           
           <div class="model-stats">
             <div class="stat-item">
-              <div class="stat-value">89.2%</div>
+              <div class="stat-value">97%</div>
               <div class="stat-label">Accuracy</div>
             </div>
             <div class="stat-item">
@@ -338,7 +339,7 @@
               <div class="stat-label">Sensitivity</div>
             </div>
             <div class="stat-item">
-              <div class="stat-value">86%</div>
+              <div class="stat-value">90%</div>
               <div class="stat-label">Specificity</div>
             </div>
             <div class="stat-item">
@@ -380,7 +381,7 @@
           
           <div class="model-stats">
             <div class="stat-item">
-              <div class="stat-value">92.7%</div>
+              <div class="stat-value">94%</div>
               <div class="stat-label">Accuracy</div>
             </div>
             <div class="stat-item">
@@ -421,7 +422,6 @@
           <ul class="features-list">
             <li><strong>Core clinical parameters:</strong> All 8 from basic model</li>
             <li><strong>Lipid profile:</strong> HDL, LDL, and triglycerides</li>
-            <li><strong>Anthropometrics:</strong> Waist circumference, WHR</li>
             <li><strong>Family history:</strong> First-degree relatives with diabetes</li>
             <li><strong>Physical activity:</strong> Weekly exercise assessment</li>
             <li><strong>Smoking status:</strong> Current and past tobacco use</li>
@@ -430,7 +430,7 @@
           
           <div class="model-stats">
             <div class="stat-item">
-              <div class="stat-value">90.8%</div>
+              <div class="stat-value">91%</div>
               <div class="stat-label">Accuracy</div>
             </div>
             <div class="stat-item">
@@ -471,16 +471,16 @@
           <ul class="features-list">
             <li><strong>Imaging analysis:</strong> X-rays, CT scans, MRIs, ultrasounds</li>
             <li><strong>Biomarker patterns:</strong> Blood tests, genetic markers</li>
-            <li><strong>Cancer types:</strong> Lung, breast, prostate, colorectal, etc.</li>
+            <li><strong>Cancer types:</strong> Lung, Breast, Brain, Oral, Colon, Acute Lymphoblastic Leukemia, Cervix cancer, Kidney Cancer.</li>
             <li><strong>Tumor characterization:</strong> Size, location, morphology</li>
-            <li><strong>Risk assessment:</strong> Probability scores for each cancer type</li>
+            <li><strong>Risk assessment:</strong> Confidence scores for each cancer type</li>
             <li><strong>Clinical correlation:</strong> Integrates with patient history</li>
           </ul>
           
           <div class="model-stats">
             <div class="stat-item">
-              <div class="stat-value">87-96%</div>
-              <div class="stat-label">Accuracy Range</div>
+              <div class="stat-value">98%</div>
+              <div class="stat-label">Accuracy</div>
             </div>
             <div class="stat-item">
               <div class="stat-value">92%</div>
@@ -497,7 +497,7 @@
           </div>
           
           <p><strong>Best for:</strong> Early cancer screening programs, diagnostic support in radiology, and integration with electronic health records for risk stratification.</p>
-          <p><strong>Output includes:</strong> Probability scores, suspicious areas highlighted, and recommended next steps.</p>
+          <p><strong>Output includes:</strong> confidence scores, top 5 predictions, suspicious areas highlighted, and report generation.</p>
         </div>
       </div>
       
@@ -528,7 +528,7 @@
           
           <div class="model-stats">
             <div class="stat-item">
-              <div class="stat-value">93.5%</div>
+              <div class="stat-value">94%</div>
               <div class="stat-label">Accuracy</div>
             </div>
             <div class="stat-item">
@@ -546,7 +546,7 @@
           </div>
           
           <p><strong>Best for:</strong> TB screening programs, high-risk population monitoring, and resource-limited settings with limited access to radiologists.</p>
-          <p><strong>Validation:</strong> WHO-approved validation across diverse populations and imaging equipment.</p>
+         <!-- <p><strong>Validation:</strong> WHO-approved validation across diverse populations and imaging equipment.</p>-->
         </div>
       </div>
       
@@ -595,7 +595,7 @@
           </div>
           
           <p><strong>Best for:</strong> Emergency departments, primary care settings, and pediatric clinics where rapid pneumonia diagnosis is critical.</p>
-          <p><strong>Output includes:</strong> Probability score, likely etiology, and recommended antibiotic class if bacterial.</p>
+          <p><strong>Output includes:</strong> Confidence score, likely etiology, and recommended antibiotic class if bacterial.</p>
         </div>
       </div>
       
@@ -626,7 +626,7 @@
           
           <div class="model-stats">
             <div class="stat-item">
-              <div class="stat-value">88.9%</div>
+              <div class="stat-value">92.9%</div>
               <div class="stat-label">Accuracy</div>
             </div>
             <div class="stat-item">
@@ -634,7 +634,7 @@
               <div class="stat-label">Sensitivity</div>
             </div>
             <div class="stat-item">
-              <div class="stat-value">87%</div>
+              <div class="stat-value">92%</div>
               <div class="stat-label">Specificity</div>
             </div>
             <div class="stat-item">
@@ -662,11 +662,10 @@
         <div class="model-about">
           <span class="close-about">&times;</span>
           <h3><i class="fas fa-info-circle"></i> About Breast Cancer Detection</h3>
-          <p>This specialized model analyzes mammograms, ultrasound images, and clinical data to detect breast cancer, providing radiologists with decision support and second opinions.</p>
+          <p>This specialized model analyzes clinical data to detect breast cancer, providing radiologists with decision support and second opinions.</p>
           
           <ul class="features-list">
-            <li><strong>Imaging analysis:</strong> Mammograms, ultrasounds, MRIs</li>
-            <li><strong>Tumor characteristics:</strong> Size, shape, margins, density</li>
+            <li><strong>breast characteristics:</strong> Size, shape, margins, density</li>
             <li><strong>BI-RADS classification:</strong> Standardized scoring</li>
             <li><strong>Risk factors:</strong> Family history, genetic markers</li>
             <li><strong>Comparative analysis:</strong> Prior exams comparison</li>
@@ -675,7 +674,7 @@
           
           <div class="model-stats">
             <div class="stat-item">
-              <div class="stat-value">91.3%</div>
+              <div class="stat-value">93.3%</div>
               <div class="stat-label">Accuracy</div>
             </div>
             <div class="stat-item">
@@ -692,8 +691,8 @@
             </div>
           </div>
           
-          <p><strong>Best for:</strong> Breast cancer screening programs, diagnostic radiology departments, and high-risk patient monitoring.</p>
-          <p><strong>FDA cleared:</strong> For use as a second reader in mammography interpretation.</p>
+          <p><strong>Best for:</strong> Breast cancer clinical analysis, diagnostic radiology departments, and high-risk patient monitoring.</p>
+          <!-- <p><strong>Validation:</strong> WHO-approved validation across diverse populations and imaging equipment.</p>-->
         </div>
       </div>
       
@@ -742,7 +741,7 @@
           </div>
           
           <p><strong>Best for:</strong> Areas with limited access to trained microscopists, field clinics, and malaria control programs.</p>
-          <p><strong>WHO validated:</strong> Meets WHO standards for malaria diagnosis in endemic regions.</p>
+         <!-- <p><strong>Validation:</strong> WHO-approved validation across diverse populations and imaging equipment.</p>-->
         </div>
       </div>
     </div>
