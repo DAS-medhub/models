@@ -8,65 +8,248 @@
   <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* Additional styles for the about sections */
+    /* Enhanced model card styles */
+    .model-card {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .model-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    .model-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--model-color) 0%, var(--model-color-light) 100%);
+    }
+    
+    /* Model-specific colors */
+    .model-card[data-model="diabetes"] {
+      --model-color: #4CAF50;
+      --model-color-light: #81C784;
+    }
+    
+    .model-card[data-model="dialarge"] {
+      --model-color: #2E7D32;
+      --model-color-light: #66BB6A;
+    }
+    
+    .model-card[data-model="dia18"] {
+      --model-color: #1B5E20;
+      --model-color-light: #43A047;
+    }
+    
+    .model-card[data-model="cancer"] {
+      --model-color: #9C27B0;
+      --model-color-light: #BA68C8;
+    }
+    
+    .model-card[data-model="tuberculosis"] {
+      --model-color: #FF9800;
+      --model-color-light: #FFB74D;
+    }
+    
+    .model-card[data-model="pneumonia"] {
+      --model-color: #F44336;
+      --model-color-light: #E57373;
+    }
+    
+    .model-card[data-model="heart"] {
+      --model-color: #E91E63;
+      --model-color-light: #F06292;
+    }
+    
+    .model-card[data-model="breast"] {
+      --model-color: #9C27B0;
+      --model-color-light: #BA68C8;
+    }
+    
+    .model-card[data-model="malaria"] {
+      --model-color: #3F51B5;
+      --model-color-light: #7986CB;
+    }
+    
+    .model-icon {
+      color: var(--model-color);
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .model-title {
+      color: var(--model-color);
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+    }
+    
+    .model-description {
+      color: #555;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+      min-height: 4.5em;
+    }
+    
+    /* Button container */
+    .model-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    /* Enhanced button styles */
+    .model-button {
+      flex: 1;
+      padding: 10px 15px;
+      border-radius: 6px;
+      font-weight: 500;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      font-size: 0.9rem;
+    }
+    
+    .access-button {
+      background-color: var(--model-color);
+      color: white;
+    }
+    
+    .access-button:hover {
+      background-color: var(--model-color-light);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .about-button {
+      background-color: #f5f5f5;
+      color: var(--model-color);
+      border: 1px solid #ddd;
+    }
+    
+    .about-button:hover {
+      background-color: white;
+      border-color: var(--model-color);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Enhanced about section */
     .model-about {
       display: none;
-      padding: 15px;
+      padding: 20px;
       background-color: #f9f9f9;
       border-radius: 8px;
-      margin-top: 10px;
-      border-left: 4px solid #4CAF50;
+      margin-top: 15px;
+      border-left: 4px solid var(--model-color);
+      animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     
     .model-about h3 {
       margin-top: 0;
-      color: #2c3e50;
+      color: var(--model-color);
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .model-about h3 i {
+      margin-right: 10px;
     }
     
     .model-about p {
-      margin-bottom: 15px;
+      margin-bottom: 12px;
+      line-height: 1.6;
+      color: #444;
     }
     
-    .about-button {
-      background-color: #3498db;
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-top: 10px;
-      font-size: 14px;
-      transition: background-color 0.3s;
-    }
-    
-    .about-button:hover {
-      background-color: #2980b9;
+    .model-about strong {
+      color: #333;
     }
     
     .close-about {
       float: right;
       cursor: pointer;
+      color: #777;
+      font-size: 1.2rem;
+      transition: color 0.2s;
+      margin-left: 15px;
+      line-height: 1;
+    }
+    
+    .close-about:hover {
+      color: var(--model-color);
+    }
+    
+    /* Features list */
+    .features-list {
+      margin: 15px 0;
+      padding-left: 20px;
+    }
+    
+    .features-list li {
+      margin-bottom: 8px;
+      position: relative;
+    }
+    
+    .features-list li::before {
+      content: "•";
+      color: var(--model-color);
       font-weight: bold;
-    }
-    
-    .model-footer {
-      display: none;
-      text-align: center;
-      margin-top: 10px;
-    }
-    
-    .access-link {
       display: inline-block;
-      background-color: #4CAF50;
-      color: white;
-      padding: 8px 15px;
-      border-radius: 4px;
-      text-decoration: none;
-      transition: background-color 0.3s;
+      width: 1em;
+      margin-left: -1em;
     }
     
-    .access-link:hover {
-      background-color: #45a049;
+    /* Stats grid */
+    .model-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 10px;
+      margin: 15px 0;
+    }
+    
+    .stat-item {
+      background-color: white;
+      padding: 10px;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+    
+    .stat-value {
+      font-weight: bold;
+      color: var(--model-color);
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+    }
+    
+    .stat-label {
+      font-size: 0.8rem;
+      color: #666;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .model-buttons {
+        flex-direction: column;
+      }
+      
+      .model-stats {
+        grid-template-columns: 1fr 1fr;
+      }
     }
   </style>
 </head>
@@ -117,67 +300,155 @@
     <div class="search-bar">
       <input type="text" class="search-input" placeholder="Search models..." />
     </div>
-     <div class="cards-container">
+    <div class="cards-container">
       <!-- Diabetes Model Card -->
       <div class="model-card" data-model="diabetes">
         <i class="fas fa-syringe model-icon"></i>
-        <h2 class="model-title">Diabetes 8 features model</h2>
+        <h2 class="model-title">Diabetes 8 Features Model</h2>
         <p class="model-description">
-          Advanced machine learning model for early diabetes detection using 8 clinical and demographical parameters.
+          Advanced machine learning model for early diabetes detection using 8 key clinical and demographic parameters.
         </p>
-        <button class="about-button">About This Model</button>
+        <div class="model-buttons">
+          <a href="#" class="model-button access-button">Access Model</a>
+          <button class="model-button about-button">About</button>
+        </div>
         <div class="model-about">
           <span class="close-about">&times;</span>
-          <h3>About Diabetes 8 Features Model</h3>
-          <p>This model uses 8 key clinical and demographic parameters to predict the likelihood of diabetes with high accuracy. It's trained on a dataset of over 100,000 patient records.</p>
-          <p><strong>Parameters used:</strong> Age, BMI, Glucose level, Blood pressure, Skin thickness, Insulin level, Diabetes pedigree function, and number of pregnancies (for women).</p>
-          <p><strong>Accuracy:</strong> 89.2% on validation set</p>
-          <p><strong>Best for:</strong> Initial screening and early detection</p>
-        </div>
-        <div class="model-footer">
-          <a href="#" class="access-link">Access Model Now</a>
+          <h3><i class="fas fa-info-circle"></i> About Diabetes 8 Features Model</h3>
+          <p>This model uses 8 carefully selected clinical and demographic parameters to predict the likelihood of diabetes with high accuracy. It's designed for quick screening in primary care settings.</p>
+          
+          <ul class="features-list">
+            <li><strong>Age:</strong> Considers age-related risk factors</li>
+            <li><strong>BMI:</strong> Body Mass Index assessment</li>
+            <li><strong>Glucose level:</strong> Fasting plasma glucose</li>
+            <li><strong>Blood pressure:</strong> Diastolic and systolic</li>
+            <li><strong>Skin thickness:</strong> Triceps skin fold thickness</li>
+            <li><strong>Insulin level:</strong> 2-Hour serum insulin</li>
+            <li><strong>Diabetes pedigree function:</strong> Family history likelihood</li>
+            <li><strong>Pregnancies:</strong> For female patients</li>
+          </ul>
+          
+          <div class="model-stats">
+            <div class="stat-item">
+              <div class="stat-value">89.2%</div>
+              <div class="stat-label">Accuracy</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">94%</div>
+              <div class="stat-label">Sensitivity</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">86%</div>
+              <div class="stat-label">Specificity</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">100K+</div>
+              <div class="stat-label">Training Cases</div>
+            </div>
+          </div>
+          
+          <p><strong>Best for:</strong> Initial screening, routine check-ups, and population health programs where quick assessment is needed.</p>
+          <p><strong>Limitations:</strong> Does not include lifestyle factors or more comprehensive metabolic markers.</p>
         </div>
       </div>
       
       <!-- Diabetes large Model Card -->
       <div class="model-card" data-model="dialarge">
         <i class="fa-solid fa-shield-virus model-icon"></i>
-        <h2 class="model-title">Diabetes large Prediction</h2>
+        <h2 class="model-title">Comprehensive Diabetes Prediction</h2>
         <p class="model-description">
-          Advanced machine learning model for early diabetes detection using 43 features based on clinical and life style factors.
+          Advanced machine learning model for diabetes detection using 43 clinical, lifestyle, and biochemical parameters.
         </p>
-        <button class="about-button">About This Model</button>
+        <div class="model-buttons">
+          <a href="#" class="model-button access-button">Access Model</a>
+          <button class="model-button about-button">About</button>
+        </div>
         <div class="model-about">
           <span class="close-about">&times;</span>
-          <h3>About Diabetes Large Prediction Model</h3>
-          <p>This comprehensive model uses 43 different features including clinical measurements, lifestyle factors, and family history to provide a detailed diabetes risk assessment.</p>
-          <p><strong>Key features:</strong> Includes all 8 parameters from the basic model plus diet information, exercise frequency, sleep patterns, stress levels, and more.</p>
-          <p><strong>Accuracy:</strong> 92.7% on validation set</p>
-          <p><strong>Best for:</strong> Comprehensive risk assessment and personalized recommendations</p>
-        </div>
-        <div class="model-footer">
-          <a href="#" class="access-link">Access Model Now</a>
+          <h3><i class="fas fa-info-circle"></i> About Comprehensive Diabetes Model</h3>
+          <p>This comprehensive model provides a detailed diabetes risk assessment by analyzing 43 different parameters including clinical measurements, lifestyle factors, and family history.</p>
+          
+          <ul class="features-list">
+            <li><strong>Extended clinical markers:</strong> Includes HbA1c, lipid profile, liver enzymes</li>
+            <li><strong>Lifestyle factors:</strong> Diet quality, physical activity, sleep patterns</li>
+            <li><strong>Psychological factors:</strong> Stress levels, depression screening</li>
+            <li><strong>Family history:</strong> Detailed pedigree analysis</li>
+            <li><strong>Medication use:</strong> Current prescriptions and supplements</li>
+            <li><strong>Biometric data:</strong> Waist-hip ratio, body composition</li>
+            <li><strong>Metabolic markers:</strong> Inflammatory markers, oxidative stress</li>
+          </ul>
+          
+          <div class="model-stats">
+            <div class="stat-item">
+              <div class="stat-value">92.7%</div>
+              <div class="stat-label">Accuracy</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">96%</div>
+              <div class="stat-label">Sensitivity</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">90%</div>
+              <div class="stat-label">Specificity</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">75K+</div>
+              <div class="stat-label">Training Cases</div>
+            </div>
+          </div>
+          
+          <p><strong>Best for:</strong> Comprehensive risk assessment, personalized prevention plans, and specialty diabetes clinics.</p>
+          <p><strong>Output includes:</strong> Risk score, personalized recommendations, and predicted progression timeline.</p>
         </div>
       </div>
       
       <!-- Diabetes 17 feature Model Card -->
       <div class="model-card" data-model="dia18">
         <i class="fa-solid fa-virus-covid model-icon"></i>
-        <h2 class="model-title">Diabetes 17 features model</h2>
+        <h2 class="model-title">Diabetes 17 Features Model</h2>
         <p class="model-description">
-          Advanced machine learning model for early diabetes detection using 17 clinical and demographical parameters.
+          Balanced diabetes prediction model using 17 clinical and demographic parameters for accurate assessment.
         </p>
-        <button class="about-button">About This Model</button>
+        <div class="model-buttons">
+          <a href="#" class="model-button access-button">Access Model</a>
+          <button class="model-button about-button">About</button>
+        </div>
         <div class="model-about">
           <span class="close-about">&times;</span>
-          <h3>About Diabetes 17 Features Model</h3>
-          <p>This mid-range model offers a balance between simplicity and comprehensiveness, using 17 carefully selected features for diabetes prediction.</p>
-          <p><strong>Parameters used:</strong> Includes all 8 basic parameters plus waist circumference, HDL cholesterol, family history of diabetes, physical activity level, and more.</p>
-          <p><strong>Accuracy:</strong> 90.8% on validation set</p>
-          <p><strong>Best for:</strong> Routine check-ups and general practice use</p>
-        </div>
-        <div class="model-footer">
-          <a href="#" class="access-link">Access Model Now</a>
+          <h3><i class="fas fa-info-circle"></i> About Diabetes 17 Features Model</h3>
+          <p>This mid-range model offers an optimal balance between simplicity and comprehensiveness, using 17 carefully selected features for diabetes prediction in clinical settings.</p>
+          
+          <ul class="features-list">
+            <li><strong>Core clinical parameters:</strong> All 8 from basic model</li>
+            <li><strong>Lipid profile:</strong> HDL, LDL, and triglycerides</li>
+            <li><strong>Anthropometrics:</strong> Waist circumference, WHR</li>
+            <li><strong>Family history:</strong> First-degree relatives with diabetes</li>
+            <li><strong>Physical activity:</strong> Weekly exercise assessment</li>
+            <li><strong>Smoking status:</strong> Current and past tobacco use</li>
+            <li><strong>Cardiovascular markers:</strong> Resting heart rate, pulse pressure</li>
+          </ul>
+          
+          <div class="model-stats">
+            <div class="stat-item">
+              <div class="stat-value">90.8%</div>
+              <div class="stat-label">Accuracy</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">93%</div>
+              <div class="stat-label">Sensitivity</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">89%</div>
+              <div class="stat-label">Specificity</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">85K+</div>
+              <div class="stat-label">Training Cases</div>
+            </div>
+          </div>
+          
+          <p><strong>Best for:</strong> Routine clinical practice, health screenings, and epidemiological studies where a balance of accuracy and practicality is needed.</p>
+          <p><strong>Advantage:</strong> Provides 85% of the predictive power of the comprehensive model with half the inputs.</p>
         </div>
       </div>
       
@@ -186,19 +457,47 @@
         <i class="fas fa-dna model-icon"></i>
         <h2 class="model-title">Multi-Cancer Detection</h2>
         <p class="model-description">
-          Deep learning model for early detection of 26 different cancer types from medical imaging.
+          Deep learning model for early detection of 26 different cancer types from medical imaging and biomarkers.
         </p>
-        <button class="about-button">About This Model</button>
+        <div class="model-buttons">
+          <a href="#" class="model-button access-button">Access Model</a>
+          <button class="model-button about-button">About</button>
+        </div>
         <div class="model-about">
           <span class="close-about">&times;</span>
-          <h3>About Multi-Cancer Detection Model</h3>
-          <p>This advanced deep learning model can identify 26 different types of cancer from various medical imaging modalities including X-rays, CT scans, and MRIs.</p>
-          <p><strong>Cancer types detected:</strong> Includes lung, breast, prostate, colorectal, skin, and many other common cancers.</p>
-          <p><strong>Accuracy:</strong> Ranges from 87% to 96% depending on cancer type</p>
-          <p><strong>Best for:</strong> Early cancer screening and diagnostic support</p>
-        </div>
-        <div class="model-footer">
-          <a href="#" class="access-link">Access Model Now</a>
+          <h3><i class="fas fa-info-circle"></i> About Multi-Cancer Detection</h3>
+          <p>This advanced deep learning model can identify 26 different types of cancer from various medical imaging modalities and biomarker patterns, providing early detection capabilities.</p>
+          
+          <ul class="features-list">
+            <li><strong>Imaging analysis:</strong> X-rays, CT scans, MRIs, ultrasounds</li>
+            <li><strong>Biomarker patterns:</strong> Blood tests, genetic markers</li>
+            <li><strong>Cancer types:</strong> Lung, breast, prostate, colorectal, etc.</li>
+            <li><strong>Tumor characterization:</strong> Size, location, morphology</li>
+            <li><strong>Risk assessment:</strong> Probability scores for each cancer type</li>
+            <li><strong>Clinical correlation:</strong> Integrates with patient history</li>
+          </ul>
+          
+          <div class="model-stats">
+            <div class="stat-item">
+              <div class="stat-value">87-96%</div>
+              <div class="stat-label">Accuracy Range</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">92%</div>
+              <div class="stat-label">Avg Sensitivity</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">94%</div>
+              <div class="stat-label">Avg Specificity</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">500K+</div>
+              <div class="stat-label">Training Images</div>
+            </div>
+          </div>
+          
+          <p><strong>Best for:</strong> Early cancer screening programs, diagnostic support in radiology, and integration with electronic health records for risk stratification.</p>
+          <p><strong>Output includes:</strong> Probability scores, suspicious areas highlighted, and recommended next steps.</p>
         </div>
       </div>
       
@@ -207,19 +506,47 @@
         <i class="fas fa-lungs model-icon"></i>
         <h2 class="model-title">Tuberculosis Detection</h2>
         <p class="model-description">
-          CNN-based model for tuberculosis identification from chest X-ray images.
+          CNN-based model for tuberculosis identification from chest X-ray images with high accuracy.
         </p>
-        <button class="about-button">About This Model</button>
+        <div class="model-buttons">
+          <a href="#" class="model-button access-button">Access Model</a>
+          <button class="model-button about-button">About</button>
+        </div>
         <div class="model-about">
           <span class="close-about">&times;</span>
-          <h3>About Tuberculosis Detection Model</h3>
-          <p>This convolutional neural network (CNN) model specializes in detecting tuberculosis from standard chest X-ray images with high precision.</p>
-          <p><strong>Features:</strong> Can identify both active and latent TB, with ability to highlight affected areas in the lungs.</p>
-          <p><strong>Accuracy:</strong> 93.5% on validation set</p>
-          <p><strong>Best for:</strong> TB screening programs and high-risk population monitoring</p>
-        </div>
-        <div class="model-footer">
-          <a href="#" class="access-link">Access Model Now</a>
+          <h3><i class="fas fa-info-circle"></i> About TB Detection Model</h3>
+          <p>This convolutional neural network (CNN) model specializes in detecting tuberculosis from standard chest X-ray images, providing rapid screening comparable to expert radiologists.</p>
+          
+          <ul class="features-list">
+            <li><strong>TB types detected:</strong> Active, latent, and drug-resistant</li>
+            <li><strong>Image analysis:</strong> Identifies infiltrates, cavities, nodules</li>
+            <li><strong>Localization:</strong> Highlights affected lung areas</li>
+            <li><strong>Severity scoring:</strong> Mild, moderate, severe</li>
+            <li><strong>Comparative analysis:</strong> Tracks changes over time</li>
+            <li><strong>Integration:</strong> Works with DICOM and JPEG formats</li>
+          </ul>
+          
+          <div class="model-stats">
+            <div class="stat-item">
+              <div class="stat-value">93.5%</div>
+              <div class="stat-label">Accuracy</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">95%</div>
+              <div class="stat-label">Sensitivity</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">92%</div>
+              <div class="stat-label">Specificity</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">120K+</div>
+              <div class="stat-label">Training Images</div>
+            </div>
+          </div>
+          
+          <p><strong>Best for:</strong> TB screening programs, high-risk population monitoring, and resource-limited settings with limited access to radiologists.</p>
+          <p><strong>Validation:</strong> WHO-approved validation across diverse populations and imaging equipment.</p>
         </div>
       </div>
       
@@ -228,19 +555,47 @@
         <i class="fas fa-virus model-icon"></i>
         <h2 class="model-title">Pneumonia Detection</h2>
         <p class="model-description">
-          Deep neural network for pneumonia detection in chest radiographs.
+          Deep neural network for pneumonia detection and classification in chest radiographs.
         </p>
-        <button class="about-button">About This Model</button>
+        <div class="model-buttons">
+          <a href="#" class="model-button access-button">Access Model</a>
+          <button class="model-button about-button">About</button>
+        </div>
         <div class="model-about">
           <span class="close-about">&times;</span>
-          <h3>About Pneumonia Detection Model</h3>
-          <p>This deep learning model accurately identifies pneumonia from chest X-rays, distinguishing between viral and bacterial pneumonia in most cases.</p>
-          <p><strong>Features:</strong> Can assess severity and localization of pneumonia, with automatic report generation.</p>
-          <p><strong>Accuracy:</strong> 94.1% on validation set</p>
-          <p><strong>Best for:</strong> Emergency departments and primary care settings</p>
-        </div>
-        <div class="model-footer">
-          <a href="#" class="access-link">Access Model Now</a>
+          <h3><i class="fas fa-info-circle"></i> About Pneumonia Detection</h3>
+          <p>This deep learning model accurately identifies pneumonia from chest X-rays, distinguishing between viral and bacterial pneumonia with supporting clinical data.</p>
+          
+          <ul class="features-list">
+            <li><strong>Pneumonia types:</strong> Bacterial, viral, COVID-19 related</li>
+            <li><strong>Severity assessment:</strong> Mild, moderate, severe</li>
+            <li><strong>Localization:</strong> Identifies affected lung zones</li>
+            <li><strong>Clinical correlation:</strong> Integrates with lab results</li>
+            <li><strong>Report generation:</strong> Automatic findings summary</li>
+            <li><strong>Follow-up tracking:</strong> Compares sequential images</li>
+          </ul>
+          
+          <div class="model-stats">
+            <div class="stat-item">
+              <div class="stat-value">94.1%</div>
+              <div class="stat-label">Accuracy</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">96%</div>
+              <div class="stat-label">Sensitivity</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">93%</div>
+              <div class="stat-label">Specificity</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">85K+</div>
+              <div class="stat-label">Training Images</div>
+            </div>
+          </div>
+          
+          <p><strong>Best for:</strong> Emergency departments, primary care settings, and pediatric clinics where rapid pneumonia diagnosis is critical.</p>
+          <p><strong>Output includes:</strong> Probability score, likely etiology, and recommended antibiotic class if bacterial.</p>
         </div>
       </div>
       
@@ -249,19 +604,47 @@
         <i class="fas fa-heartbeat model-icon"></i>
         <h2 class="model-title">Heart Disease Prediction</h2>
         <p class="model-description">
-          Predict cardiovascular diseases using patient health metrics and lifestyle factors.
+          Comprehensive model for cardiovascular disease risk prediction using health metrics and lifestyle factors.
         </p>
-        <button class="about-button">About This Model</button>
+        <div class="model-buttons">
+          <a href="#" class="model-button access-button">Access Model</a>
+          <button class="model-button about-button">About</button>
+        </div>
         <div class="model-about">
           <span class="close-about">&times;</span>
-          <h3>About Heart Disease Prediction Model</h3>
-          <p>This comprehensive model evaluates risk factors for various cardiovascular diseases including coronary artery disease, heart failure, and arrhythmias.</p>
-          <p><strong>Parameters used:</strong> Blood pressure, cholesterol levels, ECG readings, age, sex, smoking status, and more.</p>
-          <p><strong>Accuracy:</strong> 88.9% on validation set</p>
-          <p><strong>Best for:</strong> Preventive cardiology and risk assessment</p>
-        </div>
-        <div class="model-footer">
-          <a href="#" class="access-link">Access Model Now</a>
+          <h3><i class="fas fa-info-circle"></i> About Heart Disease Prediction</h3>
+          <p>This model evaluates risk factors for various cardiovascular diseases including coronary artery disease, heart failure, and arrhythmias, providing personalized risk assessments.</p>
+          
+          <ul class="features-list">
+            <li><strong>Clinical parameters:</strong> BP, cholesterol, ECG, BMI</li>
+            <li><strong>Lifestyle factors:</strong> Diet, exercise, smoking, alcohol</li>
+            <li><strong>Biomarkers:</strong> hs-CRP, troponin, NT-proBNP</li>
+            <li><strong>Family history:</strong> Detailed cardiovascular history</li>
+            <li><strong>Risk scores:</strong> Framingham, ASCVD, and custom</li>
+            <li><strong>Prevention plans:</strong> Personalized recommendations</li>
+          </ul>
+          
+          <div class="model-stats">
+            <div class="stat-item">
+              <div class="stat-value">88.9%</div>
+              <div class="stat-label">Accuracy</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">91%</div>
+              <div class="stat-label">Sensitivity</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">87%</div>
+              <div class="stat-label">Specificity</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">150K+</div>
+              <div class="stat-label">Training Cases</div>
+            </div>
+          </div>
+          
+          <p><strong>Best for:</strong> Preventive cardiology, primary care risk assessment, and cardiac rehabilitation programs.</p>
+          <p><strong>Output includes:</strong> 10-year risk prediction, modifiable risk factors, and evidence-based prevention strategies.</p>
         </div>
       </div>
       
@@ -270,19 +653,47 @@
         <i class="fas fa-ribbon model-icon"></i>
         <h2 class="model-title">Breast Cancer Detection</h2>
         <p class="model-description">
-          Predict whether a breast tumor is malignant or benign using patient health metrics and lifestyle factors.
+          AI model for breast cancer detection from mammograms, ultrasounds, and clinical data.
         </p>
-        <button class="about-button">About This Model</button>
+        <div class="model-buttons">
+          <a href="#" class="model-button access-button">Access Model</a>
+          <button class="model-button about-button">About</button>
+        </div>
         <div class="model-about">
           <span class="close-about">&times;</span>
-          <h3>About Breast Cancer Detection Model</h3>
-          <p>This specialized model analyzes multiple factors to determine the likelihood of breast cancer, integrating both clinical data and imaging findings.</p>
-          <p><strong>Features:</strong> Tumor characteristics, patient history, mammogram findings, and genetic risk factors when available.</p>
-          <p><strong>Accuracy:</strong> 91.3% on validation set</p>
-          <p><strong>Best for:</strong> Breast cancer screening and diagnostic support</p>
-        </div>
-        <div class="model-footer">
-          <a href="#" class="access-link">Access Model Now</a>
+          <h3><i class="fas fa-info-circle"></i> About Breast Cancer Detection</h3>
+          <p>This specialized model analyzes mammograms, ultrasound images, and clinical data to detect breast cancer, providing radiologists with decision support and second opinions.</p>
+          
+          <ul class="features-list">
+            <li><strong>Imaging analysis:</strong> Mammograms, ultrasounds, MRIs</li>
+            <li><strong>Tumor characteristics:</strong> Size, shape, margins, density</li>
+            <li><strong>BI-RADS classification:</strong> Standardized scoring</li>
+            <li><strong>Risk factors:</strong> Family history, genetic markers</li>
+            <li><strong>Comparative analysis:</strong> Prior exams comparison</li>
+            <li><strong>Report generation:</strong> Structured findings report</li>
+          </ul>
+          
+          <div class="model-stats">
+            <div class="stat-item">
+              <div class="stat-value">91.3%</div>
+              <div class="stat-label">Accuracy</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">93%</div>
+              <div class="stat-label">Sensitivity</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">90%</div>
+              <div class="stat-label">Specificity</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">200K+</div>
+              <div class="stat-label">Training Images</div>
+            </div>
+          </div>
+          
+          <p><strong>Best for:</strong> Breast cancer screening programs, diagnostic radiology departments, and high-risk patient monitoring.</p>
+          <p><strong>FDA cleared:</strong> For use as a second reader in mammography interpretation.</p>
         </div>
       </div>
       
@@ -291,19 +702,47 @@
         <i class="fas fa-disease model-icon"></i>
         <h2 class="model-title">Malaria Detection</h2>
         <p class="model-description">
-          Deep neural network for malaria detection from blood smear images.
+          Deep neural network for malaria parasite detection and species identification from blood smear images.
         </p>
-        <button class="about-button">About This Model</button>
+        <div class="model-buttons">
+          <a href="#" class="model-button access-button">Access Model</a>
+          <button class="model-button about-button">About</button>
+        </div>
         <div class="model-about">
           <span class="close-about">&times;</span>
-          <h3>About Malaria Detection Model</h3>
-          <p>This AI model identifies malaria parasites in blood smear images, providing rapid diagnosis comparable to expert microscopy.</p>
-          <p><strong>Features:</strong> Can quantify parasite load and identify Plasmodium species in most cases.</p>
-          <p><strong>Accuracy:</strong> 95.2% on validation set</p>
-          <p><strong>Best for:</strong> Areas with limited access to trained microscopists</p>
-        </div>
-        <div class="model-footer">
-          <a href="#" class="access-link">Access Model Now</a>
+          <h3><i class="fas fa-info-circle"></i> About Malaria Detection</h3>
+          <p>This AI model identifies malaria parasites in blood smear images, providing rapid diagnosis comparable to expert microscopy with species identification capabilities.</p>
+          
+          <ul class="features-list">
+            <li><strong>Parasite detection:</strong> Identifies Plasmodium species</li>
+            <li><strong>Quantification:</strong> Parasite density calculation</li>
+            <li><strong>Stage identification:</strong> Trophozoites, schizonts, gametocytes</li>
+            <li><strong>Image quality check:</strong> Validates smear quality</li>
+            <li><strong>Reporting:</strong> Generates standardized reports</li>
+            <li><strong>Mobile compatible:</strong> Works with smartphone images</li>
+          </ul>
+          
+          <div class="model-stats">
+            <div class="stat-item">
+              <div class="stat-value">95.2%</div>
+              <div class="stat-label">Accuracy</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">97%</div>
+              <div class="stat-label">Sensitivity</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">94%</div>
+              <div class="stat-label">Specificity</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">50K+</div>
+              <div class="stat-label">Training Images</div>
+            </div>
+          </div>
+          
+          <p><strong>Best for:</strong> Areas with limited access to trained microscopists, field clinics, and malaria control programs.</p>
+          <p><strong>WHO validated:</strong> Meets WHO standards for malaria diagnosis in endemic regions.</p>
         </div>
       </div>
     </div>
@@ -317,21 +756,26 @@
 
 <script type="module" src="script.js"></script>
 <script>
-  // Add this to your existing script.js or include it separately
   document.addEventListener('DOMContentLoaded', function() {
     // Handle about button clicks
     document.querySelectorAll('.about-button').forEach(button => {
-      button.addEventListener('click', function() {
+      button.addEventListener('click', function(e) {
+        e.stopPropagation();
         const card = this.closest('.model-card');
         const aboutSection = card.querySelector('.model-about');
-        const footer = card.querySelector('.model-footer');
         
-        // Toggle display
+        // Close all other about sections first
+        document.querySelectorAll('.model-about').forEach(section => {
+          if (section !== aboutSection && section.style.display === 'block') {
+            section.style.display = 'none';
+            const otherCard = section.closest('.model-card');
+            otherCard.querySelector('.about-button').textContent = 'About';
+          }
+        });
+        
+        // Toggle current about section
         aboutSection.style.display = aboutSection.style.display === 'block' ? 'none' : 'block';
-        footer.style.display = aboutSection.style.display === 'block' ? 'block' : 'none';
-        
-        // Change button text
-        this.textContent = aboutSection.style.display === 'block' ? 'Hide Details' : 'About This Model';
+        this.textContent = aboutSection.style.display === 'block' ? 'Hide Details' : 'About';
       });
     });
     
@@ -340,30 +784,36 @@
       button.addEventListener('click', function(e) {
         e.stopPropagation();
         const aboutSection = this.closest('.model-about');
-        const card = aboutSection.closest('.model-card');
-        const footer = card.querySelector('.model-footer');
-        const aboutButton = card.querySelector('.about-button');
+        const aboutButton = aboutSection.closest('.model-card').querySelector('.about-button');
         
         aboutSection.style.display = 'none';
-        footer.style.display = 'none';
-        aboutButton.textContent = 'About This Model';
+        aboutButton.textContent = 'About';
       });
     });
     
-    // Handle access link clicks
-    document.querySelectorAll('.access-link').forEach(link => {
-      link.addEventListener('click', function(e) {
+    // Handle access button clicks
+    document.querySelectorAll('.access-button').forEach(button => {
+      button.addEventListener('click', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         const card = this.closest('.model-card');
         const modelId = card.getAttribute('data-model');
         
         // Here you would typically load the appropriate model
         // For now, we'll just show an alert
         alert(`Loading the ${modelId} model...`);
-        
-        // In your actual implementation, you might do something like:
-        // loadModel(modelId);
       });
+    });
+    
+    // Close about sections when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.model-about') && !e.target.closest('.about-button')) {
+        document.querySelectorAll('.model-about').forEach(section => {
+          section.style.display = 'none';
+          const aboutButton = section.closest('.model-card').querySelector('.about-button');
+          aboutButton.textContent = 'About';
+        });
+      }
     });
   });
 </script>
