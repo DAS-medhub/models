@@ -241,6 +241,37 @@
       color: #666;
     }
     
+    /* Iframe container styles */
+    #iframeContainer {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      z-index: 1000;
+      flex-direction: column;
+    }
+    
+    #closeIframe {
+      align-self: flex-end;
+      margin: 10px;
+      padding: 8px 15px;
+      background: #2E7D32;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+    
+    #modelFrame {
+      flex: 1;
+      width: 100%;
+      border: none;
+    }
+    
     /* Responsive adjustments */
     @media (max-width: 768px) {
       .model-buttons {
@@ -309,7 +340,7 @@
           Advanced machine learning model for early diabetes detection using 8 key clinical and demographic parameters.
         </p>
         <div class="model-buttons">
-          <a href="#" class="model-button access-button">Access Model</a>
+          <button class="model-button access-button">Access Model</button>
           <button class="model-button about-button">About</button>
         </div>
         <div class="model-about">
@@ -318,17 +349,16 @@
           <p>This model uses 8 carefully selected clinical and demographic parameters to predict the likelihood of diabetes with high accuracy. It's designed for quick screening in primary care settings.</p>
           
           <ul class="features-list">
-  <li><strong>Age:</strong> Age of the patient, considered as a risk factor</li>
-  <li><strong>BMI:</strong> Body Mass Index — a measure of body fat based on height and weight</li>
-  <li><strong>Glucose level:</strong> Fasting blood glucose concentration (mg/dL)</li>
-  <li><strong>Blood pressure:</strong> Includes both systolic and diastolic pressure (mm Hg)</li>
-  <li><strong>Heart disease:</strong> Indicates presence or absence of cardiovascular conditions</li>
-  <li><strong>Gender:</strong> Biological sex of the patient (Male or Female)</li>
-  <li><strong>HbA1c:</strong> Glycated hemoglobin level — reflects average blood sugar over 2–3 months</li>
-  <li><strong>Smoking history:</strong> Smoking status of the patient (e.g., never, former, current)</li>
-</ul>
+            <li><strong>Age:</strong> Age of the patient, considered as a risk factor</li>
+            <li><strong>BMI:</strong> Body Mass Index — a measure of body fat based on height and weight</li>
+            <li><strong>Glucose level:</strong> Fasting blood glucose concentration (mg/dL)</li>
+            <li><strong>Blood pressure:</strong> Includes both systolic and diastolic pressure (mm Hg)</li>
+            <li><strong>Heart disease:</strong> Indicates presence or absence of cardiovascular conditions</li>
+            <li><strong>Gender:</strong> Biological sex of the patient (Male or Female)</li>
+            <li><strong>HbA1c:</strong> Glycated hemoglobin level — reflects average blood sugar over 2–3 months</li>
+            <li><strong>Smoking history:</strong> Smoking status of the patient (e.g., never, former, current)</li>
+          </ul>
 
-          
           <div class="model-stats">
             <div class="stat-item">
               <div class="stat-value">97%</div>
@@ -361,7 +391,7 @@
           Advanced machine learning model for diabetes detection using 43 clinical, lifestyle, and biochemical parameters.
         </p>
         <div class="model-buttons">
-          <a href="#" class="model-button access-button">Access Model</a>
+          <button class="model-button access-button">Access Model</button>
           <button class="model-button about-button">About</button>
         </div>
         <div class="model-about">
@@ -411,7 +441,7 @@
           Balanced diabetes prediction model using 17 clinical and demographic parameters for accurate assessment.
         </p>
         <div class="model-buttons">
-          <a href="#" class="model-button access-button">Access Model</a>
+          <button class="model-button access-button">Access Model</button>
           <button class="model-button about-button">About</button>
         </div>
         <div class="model-about">
@@ -460,7 +490,7 @@
           Deep learning model for early detection of 26 different cancer types from medical imaging and biomarkers.
         </p>
         <div class="model-buttons">
-          <a href="#" class="model-button access-button">Access Model</a>
+          <button class="model-button access-button">Access Model</button>
           <button class="model-button about-button">About</button>
         </div>
         <div class="model-about">
@@ -509,7 +539,7 @@
           CNN-based model for tuberculosis identification from chest X-ray images with high accuracy.
         </p>
         <div class="model-buttons">
-          <a href="#" class="model-button access-button">Access Model</a>
+          <button class="model-button access-button">Access Model</button>
           <button class="model-button about-button">About</button>
         </div>
         <div class="model-about">
@@ -546,7 +576,6 @@
           </div>
           
           <p><strong>Best for:</strong> TB screening programs, high-risk population monitoring, and resource-limited settings with limited access to radiologists.</p>
-         <!-- <p><strong>Validation:</strong> WHO-approved validation across diverse populations and imaging equipment.</p>-->
         </div>
       </div>
       
@@ -558,7 +587,7 @@
           Deep neural network for pneumonia detection and classification in chest radiographs.
         </p>
         <div class="model-buttons">
-          <a href="#" class="model-button access-button">Access Model</a>
+          <button class="model-button access-button">Access Model</button>
           <button class="model-button about-button">About</button>
         </div>
         <div class="model-about">
@@ -607,7 +636,7 @@
           Comprehensive model for cardiovascular disease risk prediction using health metrics and lifestyle factors.
         </p>
         <div class="model-buttons">
-          <a href="#" class="model-button access-button">Access Model</a>
+          <button class="model-button access-button">Access Model</button>
           <button class="model-button about-button">About</button>
         </div>
         <div class="model-about">
@@ -656,7 +685,7 @@
           AI model for breast cancer detection from mammograms, ultrasounds, and clinical data.
         </p>
         <div class="model-buttons">
-          <a href="#" class="model-button access-button">Access Model</a>
+          <button class="model-button access-button">Access Model</button>
           <button class="model-button about-button">About</button>
         </div>
         <div class="model-about">
@@ -692,7 +721,6 @@
           </div>
           
           <p><strong>Best for:</strong> Breast cancer clinical analysis, diagnostic radiology departments, and high-risk patient monitoring.</p>
-          <!-- <p><strong>Validation:</strong> WHO-approved validation across diverse populations and imaging equipment.</p>-->
         </div>
       </div>
       
@@ -704,7 +732,7 @@
           Deep neural network for malaria parasite detection and species identification from blood smear images.
         </p>
         <div class="model-buttons">
-          <a href="#" class="model-button access-button">Access Model</a>
+          <button class="model-button access-button">Access Model</button>
           <button class="model-button about-button">About</button>
         </div>
         <div class="model-about">
@@ -741,7 +769,6 @@
           </div>
           
           <p><strong>Best for:</strong> Areas with limited access to trained microscopists, field clinics, and malaria control programs.</p>
-         <!-- <p><strong>Validation:</strong> WHO-approved validation across diverse populations and imaging equipment.</p>-->
         </div>
       </div>
     </div>
@@ -787,20 +814,6 @@
         
         aboutSection.style.display = 'none';
         aboutButton.textContent = 'About';
-      });
-    });
-    
-    // Handle access button clicks
-    document.querySelectorAll('.access-button').forEach(button => {
-      button.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        const card = this.closest('.model-card');
-        const modelId = card.getAttribute('data-model');
-        
-        // Here you would typically load the appropriate model
-        // For now, we'll just show an alert
-        alert(`Loading the ${modelId} model...`);
       });
     });
     
