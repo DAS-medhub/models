@@ -118,11 +118,11 @@ header {
 }
 
 .access-button {
-  background: linear-gradient(135deg, orange 0%, orange 100%);
+  background: linear-gradient(135deg, rgb(179, 118, 5) 0%, orange 100%);
   color: white;
   border: none;
   padding: 8px 20px;
-  border-radius: 20px;
+  border-radius: 10px;
   cursor: pointer;
   transition: transform 0.2s ease;
 }
