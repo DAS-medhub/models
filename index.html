@@ -282,6 +282,45 @@
         grid-template-columns: 1fr 1fr;
       }
     }
+
+    /* Add to your existing CSS */
+.model-card[data-model="microbiome"] {
+  --model-color: #6A1B9A;
+  --model-color-light: #9C4DCC;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+  margin: 15px 0;
+}
+
+.feature-item {
+  background: white;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  transition: all 0.2s ease;
+}
+
+.feature-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.feature-item i {
+  color: var(--model-color);
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.feature-item span {
+  font-size: 0.8rem;
+  color: #555;
+}
   </style>
 </head>
 <body>
@@ -481,6 +520,85 @@
           <p><strong>Advantage:</strong> Provides 85% of the predictive power of the comprehensive model with half the inputs.</p>
         </div>
       </div>
+
+      <!-- Microbiome Sample Origin Predictor Model Card -->
+<div class="model-card" data-model="microbiome">
+  <i class="fas fa-dna model-icon"></i>
+  <h2 class="model-title">Microbiome Sample Origin Predictor</h2>
+  <p class="model-description">
+    Predicts body site origin (Mouth, Nasal, Skin, Stool) of microbiome samples from sequencing characteristics or FastQ files.
+  </p>
+  <div class="model-buttons">
+    <button class="model-button access-button"><u>Access Model</u></button>
+    <button class="model-button about-button">About</button>
+  </div>
+  <div class="model-about">
+    <span class="close-about">&times;</span>
+    <h3><i class="fas fa-info-circle"></i> About Microbiome Sample Origin Predictor</h3>
+    <p>This neural network model predicts the body site origin of microbiome samples with exceptional accuracy, supporting both manual feature entry and FastQ file uploads for automated analysis.</p>
+    
+    <ul class="features-list">
+      <li><strong>Input Methods:</strong> Manual entry of 27 sequencing features or FastQ file upload</li>
+      <li><strong>Prediction Targets:</strong> Mouth, Nasal, Skin, Stool origins</li>
+      <li><strong>Sequencing Features:</strong> Read statistics, GC content, quality metrics, nucleotide composition, k-mer frequencies</li>
+      <li><strong>File Support:</strong> .fastq, .fq, .txt formats</li>
+      <li><strong>Visualizations:</strong> Probability bars, confidence scores, location descriptions</li>
+      <li><strong>Sample Data:</strong> Predefined values for testing</li>
+      <li><strong>Integration:</strong> Works with standard sequencing outputs</li>
+    </ul>
+
+    <div class="model-stats">
+      <div class="stat-item">
+        <div class="stat-value">99.31%</div>
+        <div class="stat-label">Accuracy</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">98.7%</div>
+        <div class="stat-label">Sensitivity</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">99.5%</div>
+        <div class="stat-label">Specificity</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">45K+</div>
+        <div class="stat-label">Training Samples</div>
+      </div>
+    </div>
+    
+    <h4><i class="fas fa-list-check"></i> Key Features:</h4>
+    <div class="features-grid">
+      <div class="feature-item">
+        <i class="fas fa-keyboard"></i>
+        <span>Manual Input</span>
+      </div>
+      <div class="feature-item">
+        <i class="fas fa-file-upload"></i>
+        <span>FastQ Upload</span>
+      </div>
+      <div class="feature-item">
+        <i class="fas fa-chart-bar"></i>
+        <span>Probability Visualizations</span>
+      </div>
+      <div class="feature-item">
+        <i class="fas fa-mobile-alt"></i>
+        <span>Mobile Optimized</span>
+      </div>
+      <div class="feature-item">
+        <i class="fas fa-info-circle"></i>
+        <span>Detailed Tooltips</span>
+      </div>
+      <div class="feature-item">
+        <i class="fas fa-bell"></i>
+        <span>Action Notifications</span>
+      </div>
+    </div>
+    
+    <p><strong>Best for:</strong> Microbiome research, clinical diagnostics, forensic analysis, and quality control in sequencing pipelines.</p>
+    <p><strong>Output includes:</strong> Predicted origin with confidence score, probability distribution across all sites, and detailed characteristics of the predicted location.</p>
+    <p><strong>Technical Note:</strong> Model built with TensorFlow.js for browser-based execution, with feature extraction algorithms optimized for microbiome sequencing data.</p>
+  </div>
+</div>
       
       <!-- Cancer Model Card -->
       <div class="model-card" data-model="cancer">
