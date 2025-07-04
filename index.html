@@ -282,6 +282,44 @@
         grid-template-columns: 1fr 1fr;
       }
     }
+    /* Add to your existing CSS */
+.model-card[data-model="microbiome"] {
+  --model-color: #6A1B9A;
+  --model-color-light: #9C4DCC;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+  margin: 15px 0;
+}
+
+.feature-item {
+  background: white;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  transition: all 0.2s ease;
+}
+
+.feature-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.feature-item i {
+  color: var(--model-color);
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.feature-item span {
+  font-size: 0.8rem;
+  color: #555;
+}
 
   </style>
 </head>
