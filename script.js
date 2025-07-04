@@ -54,7 +54,8 @@ const modelUrls = {
   breast: 'https://sebukpor.github.io/breast-cancer-classification/',
   malaria: 'https://sebukpor.github.io/malaria-classification/',
   dialarge: 'https://sebukpor.github.io/Diabetes-large-input/',
-  dia18: 'https://sebukpor.github.io/diabetes-18/'
+  dia18: 'https://sebukpor.github.io/diabetes-18/',
+  microbiome: 'https://das-medhub.github.io/microbiome-sample-origin-predictor/'
 };
 
 // Current model tracking
