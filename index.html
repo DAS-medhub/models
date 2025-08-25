@@ -75,6 +75,12 @@
      --model-color: #2E7D32;
       --model-color-light: #66BB6A;
     }
+
+        .model-card[data-model="chest-xray"] {
+     --model-color: #2E7D32;
+      --model-color-light: #66BB6A;
+    }
+    
     
     .model-icon {
       color: var(--model-color);
@@ -649,6 +655,53 @@
           <p><strong>Output includes:</strong> confidence scores, top 5 predictions, suspicious areas highlighted, and report generation.</p>
         </div>
       </div>
+<!-- Tuberculosis Model Card -->
+      <div class="model-card" data-model="chest-xray">
+    <i class="fa-solid fa-lungs model-icon"></i>
+    <h2 class="model-title">Chest X-ray Abnormality Detection Model</h2>
+    <p class="model-description">
+        Advanced AI model for detecting abnormalities in chest X-ray images, identifying 14 critical conditions with high accuracy.
+    </p>
+    <div class="model-buttons">
+        <button class="model-button access-button"><u>Access Model</u></button>
+        <button class="model-button about-button">About</button>
+    </div>
+    <div class="model-about">
+        <span class="close-about">&times;</span>
+        <h3><i class="fas fa-info-circle"></i> About Chest X-ray Abnormality Detection Model</h3>
+        <p>This robust model leverages deep learning to analyze chest X-ray images, detecting a wide range of abnormalities to assist radiologists in clinical diagnostics.</p>
+        
+        <ul class="features-list">
+            <li><strong>Supported abnormalities:</strong> Aortic enlargement, Atelectasis, Calcification, Cardiomegaly, Consolidation, ILD, Infiltration, Lung Opacity, Nodule/Mass, Other lesion, Pleural effusion, Pleural thickening, Pneumothorax, Pulmonary fibrosis</li>
+            <li><strong>Input format:</strong> Standard chest X-ray images (JPEG/PNG)</li>
+            <li><strong>Processing:</strong> Real-time bounding box detection with confidence scores</li>
+            <li><strong>Integration:</strong> Web-based interface with ONNX runtime</li>
+            <li><strong>Output:</strong> Visualized detections with detailed radiology report generation</li>
+        </ul>
+        
+        <div class="model-stats">
+            <div class="stat-item">
+                <div class="stat-value">92%</div>
+                <div class="stat-label">Accuracy</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">90%</div>
+                <div class="stat-label">Sensitivity</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">93%</div>
+                <div class="stat-label">Specificity</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">100K+</div>
+                <div class="stat-label">Training Images</div>
+            </div>
+        </div>
+        
+        <p><strong>Best for:</strong> Clinical radiology, emergency diagnostics, and second-opinion assessments in medical imaging.</p>
+        <p><strong>Advantage:</strong> Provides rapid, accurate detection of multiple abnormalities with a user-friendly interface for radiologists and clinicians.</p>
+    </div>
+</div>
       
       <!-- Tuberculosis Model Card -->
       <div class="model-card" data-model="tuberculosis">
@@ -951,3 +1004,4 @@
 
 </body>
 </html>
+
