@@ -14,12 +14,12 @@
       overflow: hidden;
       transition: all 0.3s ease;
     }
-    
+   
     .model-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     }
-    
+   
     .model-card::before {
       content: '';
       position: absolute;
@@ -29,71 +29,74 @@
       height: 4px;
       background: linear-gradient(90deg, var(--model-color) 0%, var(--model-color-light) 100%);
     }
-    
+   
     /* Model-specific colors */
     .model-card[data-model="diabetes"] {
-      --model-color: #2E7D32;
-      --model-color-light: #66BB6A;
+      --model-color: #007BFF; /* Blue for diabetes */
+      --model-color-light: #4FC3F7;
     }
-    
+   
     .model-card[data-model="dialarge"] {
-      --model-color: #2E7D32;
-      --model-color-light: #66BB6A;
+      --model-color: #0056D2; /* Deeper blue for comprehensive diabetes */
+      --model-color-light: #2196F3;
     }
-    
+   
     .model-card[data-model="dia18"] {
-      --model-color: #2E7D32;
-      --model-color-light: #66BB6A;
+      --model-color: #0288D1; /* Mid-blue for 17 features diabetes */
+      --model-color-light: #81D4FA;
     }
-    
+   
     .model-card[data-model="cancer"] {
-     --model-color: #2E7D32;
-      --model-color-light: #66BB6A;
+     --model-color: #6A1B9A; /* Purple for general cancer */
+      --model-color-light: #BA68C8;
     }
-    
+   
     .model-card[data-model="tuberculosis"] {
-      --model-color: #2E7D32;
-      --model-color-light: #66BB6A;
+      --model-color: #EF6C00; /* Orange for TB (respiratory) */
+      --model-color-light: #FFB74D;
     }
-    
+   
     .model-card[data-model="pneumonia"] {
-      --model-color: #2E7D32;
-      --model-color-light: #66BB6A;
+      --model-color: #D84315; /* Red-orange for pneumonia */
+      --model-color-light: #FF8A65;
     }
-    
+   
     .model-card[data-model="heart"] {
-      --model-color: #2E7D32;
-      --model-color-light: #66BB6A;
+      --model-color: #C62828; /* Red for heart disease */
+      --model-color-light: #EF5350;
     }
-    
+   
     .model-card[data-model="breast"] {
-     --model-color: #2E7D32;
-      --model-color-light: #66BB6A;
+     --model-color: #D81B60; /* Pink for breast cancer */
+      --model-color-light: #F06292;
     }
-    
+   
     .model-card[data-model="malaria"] {
-     --model-color: #2E7D32;
-      --model-color-light: #66BB6A;
+     --model-color: #F9A825; /* Yellow for malaria */
+      --model-color-light: #FFE082;
     }
-
         .model-card[data-model="chest"] {
-     --model-color: #2E7D32;
+     --model-color: #BF360C; /* Deep orange for chest abnormalities */
+      --model-color-light: #FF7043;
+    }
+   
+    .model-card[data-model="microbiome"] {
+     --model-color: #2E7D32; /* Keep green for microbiome */
       --model-color-light: #66BB6A;
     }
-    
-    
+   
     .model-icon {
       color: var(--model-color);
       font-size: 2.2rem;
       margin-bottom: 1rem;
     }
-    
+   
     .model-title {
       color: var(--model-color);
       font-size: 1.4rem;
       margin-bottom: 0.8rem;
     }
-    
+   
     .model-description {
       color: #555;
       font-size: 0.95rem;
@@ -101,14 +104,14 @@
       margin-bottom: 1.5rem;
       min-height: 4.5em;
     }
-    
+   
     /* Button container */
     .model-buttons {
       display: flex;
       gap: 10px;
       margin-top: 15px;
     }
-    
+   
     /* Enhanced button styles */
     .model-button {
       flex: 1;
@@ -121,31 +124,31 @@
       border: none;
       font-size: 0.9rem;
     }
-    
+   
     .access-button {
       background-color: var(--model-color);
       color: white;
     }
-    
+   
     .access-button:hover {
       background-color: var(--model-color-light);
       transform: translateY(-2px);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-    
+   
     .about-button {
       background-color: #f5f5f5;
       color: var(--model-color);
       border: 1px solid #ddd;
     }
-    
+   
     .about-button:hover {
       background-color: white;
       border-color: var(--model-color);
       transform: translateY(-2px);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-    
+   
     /* Enhanced about section */
     .model-about {
       display: none;
@@ -156,12 +159,12 @@
       border-left: 4px solid var(--model-color);
       animation: fadeIn 0.3s ease;
     }
-    
+   
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    
+   
     .model-about h3 {
       margin-top: 0;
       color: var(--model-color);
@@ -170,21 +173,21 @@
       display: flex;
       align-items: center;
     }
-    
+   
     .model-about h3 i {
       margin-right: 10px;
     }
-    
+   
     .model-about p {
       margin-bottom: 12px;
       line-height: 1.6;
       color: #444;
     }
-    
+   
     .model-about strong {
       color: #333;
     }
-    
+   
     .close-about {
       float: right;
       cursor: pointer;
@@ -194,22 +197,22 @@
       margin-left: 15px;
       line-height: 1;
     }
-    
+   
     .close-about:hover {
       color: var(--model-color);
     }
-    
+   
     /* Features list */
     .features-list {
       margin: 15px 0;
       padding-left: 20px;
     }
-    
+   
     .features-list li {
       margin-bottom: 8px;
       position: relative;
     }
-    
+   
     .features-list li::before {
       content: "•";
       color: var(--model-color);
@@ -218,7 +221,7 @@
       width: 1em;
       margin-left: -1em;
     }
-    
+   
     /* Stats grid */
     .model-stats {
       display: grid;
@@ -226,7 +229,7 @@
       gap: 10px;
       margin: 15px 0;
     }
-    
+   
     .stat-item {
       background-color: white;
       padding: 10px;
@@ -234,19 +237,19 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.05);
       text-align: center;
     }
-    
+   
     .stat-value {
       font-weight: bold;
       color: var(--model-color);
       font-size: 1.1rem;
       margin-bottom: 5px;
     }
-    
+   
     .stat-label {
       font-size: 0.8rem;
       color: #666;
     }
-    
+   
     /* Iframe container styles */
     #iframeContainer {
       display: none;
@@ -259,7 +262,7 @@
       z-index: 1000;
       flex-direction: column;
     }
-    
+   
     #closeIframe {
       align-self: flex-end;
       margin: 10px;
@@ -271,37 +274,30 @@
       cursor: pointer;
       z-index: 1001;
     }
-    
+   
     #modelFrame {
       flex: 1;
       width: 100%;
       border: none;
     }
-    
+   
     /* Responsive adjustments */
     @media (max-width: 768px) {
       .model-buttons {
         flex-direction: column;
       }
-      
+     
       .model-stats {
         grid-template-columns: 1fr 1fr;
       }
     }
     /* Add to your existing CSS */
-    .model-card[data-model="microbiome"] {
-     --model-color: #2E7D32;
-      --model-color-light: #66BB6A;
-}
-
-
-.features-grid {
+    .features-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 12px;
   margin: 15px 0;
 }
-
 .feature-item {
   background: white;
   padding: 10px;
@@ -310,24 +306,20 @@
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
   transition: all 0.2s ease;
 }
-
 .feature-item:hover {
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
-
 .feature-item i {
   color: var(--model-color);
   font-size: 1.2rem;
   margin-bottom: 5px;
   display: block;
 }
-
 .feature-item span {
   font-size: 0.8rem;
   color: #555;
 }
-
   </style>
 </head>
 <body>
@@ -348,7 +340,6 @@
       <button id="signup-button">Sign Up</button>
     </div>
   </header>
-
   <!-- Auth Modal -->
   <div class="auth-modal" id="auth-modal">
     <!-- Login Form -->
@@ -360,7 +351,6 @@
       <button id="login-submit">Login</button>
       <p>Don't have an account? <a href="#" id="switch-to-signup">Sign Up</a></p>
     </div>
-
     <!-- Signup Form -->
     <div class="auth-form" id="signup-form" style="display: none;">
       <span class="close-auth">&times;</span>
@@ -371,7 +361,6 @@
       <p>Already have an account? <a href="#" id="switch-to-login">Login</a></p>
     </div>
   </div>
-
   <!-- Main content container for search and cards -->
   <div class="container" id="cardsContainer">
     <div class="search-bar">
@@ -393,7 +382,7 @@
           <span class="close-about">&times;</span>
           <h3><i class="fas fa-info-circle"></i> About Diabetes 8 Features Model</h3>
           <p>This model uses 8 carefully selected clinical and demographic parameters to predict the likelihood of diabetes with high accuracy. It's designed for quick screening in primary care settings.</p>
-          
+         
           <ul class="features-list">
             <li><strong>Age:</strong> Age of the patient, considered as a risk factor</li>
             <li><strong>BMI:</strong> Body Mass Index — a measure of body fat based on height and weight</li>
@@ -404,7 +393,6 @@
             <li><strong>HbA1c:</strong> Glycated hemoglobin level — reflects average blood sugar over 2–3 months</li>
             <li><strong>Smoking history:</strong> Smoking status of the patient (e.g., never, former, current)</li>
           </ul>
-
           <div class="model-stats">
             <div class="stat-item">
               <div class="stat-value">97%</div>
@@ -423,12 +411,12 @@
               <div class="stat-label">Training Cases</div>
             </div>
           </div>
-          
+         
           <p><strong>Best for:</strong> Initial screening, routine check-ups, and population health programs where quick assessment is needed.</p>
           <p><strong>Limitations:</strong> Does not include lifestyle factors or more comprehensive metabolic markers.</p>
         </div>
       </div>
-      
+     
       <!-- Diabetes large Model Card -->
       <div class="model-card" data-model="dialarge">
         <i class="fa-solid fa-shield-virus model-icon"></i>
@@ -444,7 +432,7 @@
           <span class="close-about">&times;</span>
           <h3><i class="fas fa-info-circle"></i> About Comprehensive Diabetes Model</h3>
           <p>This comprehensive model provides a detailed diabetes risk assessment by analyzing 43 different parameters including clinical measurements, lifestyle factors, and family history.</p>
-          
+         
           <ul class="features-list">
             <li><strong>Extended clinical markers:</strong> Includes HbA1c, lipid profile, liver enzymes</li>
             <li><strong>Lifestyle factors:</strong> Diet quality, physical activity, sleep patterns</li>
@@ -454,7 +442,7 @@
             <li><strong>Biometric data:</strong> Waist-hip ratio, body composition</li>
             <li><strong>Metabolic markers:</strong> Inflammatory markers, oxidative stress</li>
           </ul>
-          
+         
           <div class="model-stats">
             <div class="stat-item">
               <div class="stat-value">94%</div>
@@ -473,12 +461,12 @@
               <div class="stat-label">Training Cases</div>
             </div>
           </div>
-          
+         
           <p><strong>Best for:</strong> Comprehensive risk assessment, personalized prevention plans, and specialty diabetes clinics.</p>
           <p><strong>Output includes:</strong> Risk score, personalized recommendations, and predicted progression timeline.</p>
         </div>
       </div>
-      
+     
       <!-- Diabetes 17 feature Model Card -->
       <div class="model-card" data-model="dia18">
         <i class="fa-solid fa-virus-covid model-icon"></i>
@@ -494,7 +482,7 @@
           <span class="close-about">&times;</span>
           <h3><i class="fas fa-info-circle"></i> About Diabetes 17 Features Model</h3>
           <p>This mid-range model offers an optimal balance between simplicity and comprehensiveness, using 17 carefully selected features for diabetes prediction in clinical settings.</p>
-          
+         
           <ul class="features-list">
             <li><strong>Core clinical parameters:</strong> All 8 from basic model</li>
             <li><strong>Lipid profile:</strong> HDL, LDL, and triglycerides</li>
@@ -503,7 +491,7 @@
             <li><strong>Smoking status:</strong> Current and past tobacco use</li>
             <li><strong>Cardiovascular markers:</strong> Resting heart rate, pulse pressure</li>
           </ul>
-          
+         
           <div class="model-stats">
             <div class="stat-item">
               <div class="stat-value">91%</div>
@@ -522,12 +510,11 @@
               <div class="stat-label">Training Cases</div>
             </div>
           </div>
-          
+         
           <p><strong>Best for:</strong> Routine clinical practice, health screenings, and epidemiological studies where a balance of accuracy and practicality is needed.</p>
           <p><strong>Advantage:</strong> Provides 85% of the predictive power of the comprehensive model with half the inputs.</p>
         </div>
       </div>
-
       <!-- Microbiome Sample Origin Predictor Model Card -->
 <div class="model-card" data-model="microbiome">
   <i class="fas fa-bacteria model-icon"></i>
@@ -543,7 +530,7 @@
     <span class="close-about">&times;</span>
     <h3><i class="fas fa-info-circle"></i> About Microbiome Sample Origin Predictor</h3>
     <p>This neural network model predicts the body site origin of microbiome samples with exceptional accuracy, supporting both manual feature entry and FastQ file uploads for automated analysis.</p>
-    
+   
     <ul class="features-list">
       <li><strong>Input Methods:</strong> Manual entry of 27 sequencing features or FastQ file upload</li>
       <li><strong>Prediction Targets:</strong> Mouth, Nasal, Skin, Stool origins</li>
@@ -553,7 +540,6 @@
       <li><strong>Sample Data:</strong> Predefined values for testing</li>
       <li><strong>Integration:</strong> Works with standard sequencing outputs</li>
     </ul>
-
     <div class="model-stats">
       <div class="stat-item">
         <div class="stat-value">99.31%</div>
@@ -572,7 +558,7 @@
         <div class="stat-label">Training Samples</div>
       </div>
     </div>
-    
+   
     <h4><i class="fas fa-list-check"></i> Key Features:</h4>
     <div class="features-grid">
       <div class="feature-item">
@@ -600,13 +586,13 @@
         <span>Action Notifications</span>
       </div>
     </div>
-    
+   
     <p><strong>Best for:</strong> Microbiome research, clinical diagnostics, forensic analysis, and quality control in sequencing pipelines.</p>
     <p><strong>Output includes:</strong> Predicted origin with confidence score, probability distribution across all sites, and detailed characteristics of the predicted location.</p>
     <p><strong>Technical Note:</strong> Model built with TensorFlow.js for browser-based execution, with feature extraction algorithms optimized for microbiome sequencing data.</p>
   </div>
 </div>
-      
+     
       <!-- Cancer Model Card -->
       <div class="model-card" data-model="cancer">
         <i class="fas fa-dna model-icon"></i>
@@ -622,7 +608,7 @@
           <span class="close-about">&times;</span>
           <h3><i class="fas fa-info-circle"></i> About Multi-Cancer Detection</h3>
           <p>This advanced deep learning model can identify 26 different types of cancer from various medical imaging modalities and biomarker patterns, providing early detection capabilities.</p>
-          
+         
           <ul class="features-list">
             <li><strong>Imaging analysis:</strong> X-rays, CT scans, MRIs, ultrasounds</li>
             <li><strong>Biomarker patterns:</strong> Blood tests, genetic markers</li>
@@ -631,7 +617,7 @@
             <li><strong>Risk assessment:</strong> Confidence scores for each cancer type</li>
             <li><strong>Clinical correlation:</strong> Integrates with patient history</li>
           </ul>
-          
+         
           <div class="model-stats">
             <div class="stat-item">
               <div class="stat-value">98%</div>
@@ -650,7 +636,7 @@
               <div class="stat-label">Training Images</div>
             </div>
           </div>
-          
+         
           <p><strong>Best for:</strong> Early cancer screening programs, diagnostic support in radiology, and integration with electronic health records for risk stratification.</p>
           <p><strong>Output includes:</strong> confidence scores, top 5 predictions, suspicious areas highlighted, and report generation.</p>
         </div>
@@ -670,7 +656,7 @@
         <span class="close-about">&times;</span>
         <h3><i class="fas fa-info-circle"></i> About Chest X-ray Abnormality Detection Model</h3>
         <p>This robust model leverages deep learning to analyze chest X-ray images, detecting a wide range of abnormalities to assist radiologists in clinical diagnostics.</p>
-        
+       
         <ul class="features-list">
             <li><strong>Supported abnormalities:</strong> Aortic enlargement, Atelectasis, Calcification, Cardiomegaly, Consolidation, ILD, Infiltration, Lung Opacity, Nodule/Mass, Other lesion, Pleural effusion, Pleural thickening, Pneumothorax, Pulmonary fibrosis</li>
             <li><strong>Input format:</strong> Standard chest X-ray images (JPEG/PNG)</li>
@@ -678,7 +664,7 @@
             <li><strong>Integration:</strong> Web-based interface with ONNX runtime</li>
             <li><strong>Output:</strong> Visualized detections with detailed radiology report generation</li>
         </ul>
-        
+       
         <div class="model-stats">
             <div class="stat-item">
                 <div class="stat-value">92%</div>
@@ -697,12 +683,12 @@
                 <div class="stat-label">Training Images</div>
             </div>
         </div>
-        
+       
         <p><strong>Best for:</strong> Clinical radiology, emergency diagnostics, and second-opinion assessments in medical imaging.</p>
         <p><strong>Advantage:</strong> Provides rapid, accurate detection of multiple abnormalities with a user-friendly interface for radiologists and clinicians.</p>
     </div>
 </div>
-      
+     
       <!-- Tuberculosis Model Card -->
       <div class="model-card" data-model="tuberculosis">
         <i class="fas fa-lungs model-icon"></i>
@@ -718,7 +704,7 @@
           <span class="close-about">&times;</span>
           <h3><i class="fas fa-info-circle"></i> About TB Detection Model</h3>
           <p>This convolutional neural network (CNN) model specializes in detecting tuberculosis from standard chest X-ray images, providing rapid screening comparable to expert radiologists.</p>
-          
+         
           <ul class="features-list">
             <li><strong>TB types detected:</strong> Active, latent, and drug-resistant</li>
             <li><strong>Image analysis:</strong> Identifies infiltrates, cavities, nodules</li>
@@ -727,7 +713,7 @@
             <li><strong>Comparative analysis:</strong> Tracks changes over time</li>
             <li><strong>Integration:</strong> Works with DICOM and JPEG formats</li>
           </ul>
-          
+         
           <div class="model-stats">
             <div class="stat-item">
               <div class="stat-value">94%</div>
@@ -746,11 +732,11 @@
               <div class="stat-label">Training Images</div>
             </div>
           </div>
-          
+         
           <p><strong>Best for:</strong> TB screening programs, high-risk population monitoring, and resource-limited settings with limited access to radiologists.</p>
         </div>
       </div>
-      
+     
       <!-- Pneumonia Model Card -->
       <div class="model-card" data-model="pneumonia">
         <i class="fas fa-virus model-icon"></i>
@@ -766,7 +752,7 @@
           <span class="close-about">&times;</span>
           <h3><i class="fas fa-info-circle"></i> About Pneumonia Detection</h3>
           <p>This deep learning model accurately identifies pneumonia from chest X-rays, distinguishing between viral and bacterial pneumonia with supporting clinical data.</p>
-          
+         
           <ul class="features-list">
             <li><strong>Pneumonia types:</strong> Bacterial, viral, COVID-19 related</li>
             <li><strong>Severity assessment:</strong> Mild, moderate, severe</li>
@@ -775,7 +761,7 @@
             <li><strong>Report generation:</strong> Automatic findings summary</li>
             <li><strong>Follow-up tracking:</strong> Compares sequential images</li>
           </ul>
-          
+         
           <div class="model-stats">
             <div class="stat-item">
               <div class="stat-value">94.1%</div>
@@ -794,12 +780,12 @@
               <div class="stat-label">Training Images</div>
             </div>
           </div>
-          
+         
           <p><strong>Best for:</strong> Emergency departments, primary care settings, and pediatric clinics where rapid pneumonia diagnosis is critical.</p>
           <p><strong>Output includes:</strong> Confidence score, likely etiology, and recommended antibiotic class if bacterial.</p>
         </div>
       </div>
-      
+     
       <!-- Heart Disease Model Card -->
       <div class="model-card" data-model="heart">
         <i class="fas fa-heartbeat model-icon"></i>
@@ -815,7 +801,7 @@
           <span class="close-about">&times;</span>
           <h3><i class="fas fa-info-circle"></i> About Heart Disease Prediction</h3>
           <p>This model evaluates risk factors for various cardiovascular diseases including coronary artery disease, heart failure, and arrhythmias, providing personalized risk assessments.</p>
-          
+         
           <ul class="features-list">
             <li><strong>Clinical parameters:</strong> BP, cholesterol, ECG, BMI</li>
             <li><strong>Lifestyle factors:</strong> Diet, exercise, smoking, alcohol</li>
@@ -824,7 +810,7 @@
             <li><strong>Risk scores:</strong> Framingham, ASCVD, and custom</li>
             <li><strong>Prevention plans:</strong> Personalized recommendations</li>
           </ul>
-          
+         
           <div class="model-stats">
             <div class="stat-item">
               <div class="stat-value">92.9%</div>
@@ -843,12 +829,12 @@
               <div class="stat-label">Training Cases</div>
             </div>
           </div>
-          
+         
           <p><strong>Best for:</strong> Preventive cardiology, primary care risk assessment, and cardiac rehabilitation programs.</p>
           <p><strong>Output includes:</strong> 10-year risk prediction, modifiable risk factors, and evidence-based prevention strategies.</p>
         </div>
       </div>
-      
+     
       <!-- Breast Cancer Model Card -->
       <div class="model-card" data-model="breast">
         <i class="fas fa-ribbon model-icon"></i>
@@ -864,7 +850,7 @@
           <span class="close-about">&times;</span>
           <h3><i class="fas fa-info-circle"></i> About Breast Cancer Detection</h3>
           <p>This specialized model analyzes clinical data to detect breast cancer, providing radiologists with decision support and second opinions.</p>
-          
+         
           <ul class="features-list">
             <li><strong>breast characteristics:</strong> Size, shape, margins, density</li>
             <li><strong>BI-RADS classification:</strong> Standardized scoring</li>
@@ -872,7 +858,7 @@
             <li><strong>Comparative analysis:</strong> Prior exams comparison</li>
             <li><strong>Report generation:</strong> Structured findings report</li>
           </ul>
-          
+         
           <div class="model-stats">
             <div class="stat-item">
               <div class="stat-value">93.3%</div>
@@ -891,11 +877,11 @@
               <div class="stat-label">Training Images</div>
             </div>
           </div>
-          
+         
           <p><strong>Best for:</strong> Breast cancer clinical analysis, diagnostic radiology departments, and high-risk patient monitoring.</p>
         </div>
       </div>
-      
+     
       <!-- Malaria Model Card -->
       <div class="model-card" data-model="malaria">
         <i class="fas fa-disease model-icon"></i>
@@ -911,7 +897,7 @@
           <span class="close-about">&times;</span>
           <h3><i class="fas fa-info-circle"></i> About Malaria Detection</h3>
           <p>This AI model identifies malaria parasites in blood smear images, providing rapid diagnosis comparable to expert microscopy with species identification capabilities.</p>
-          
+         
           <ul class="features-list">
             <li><strong>Parasite detection:</strong> Identifies Plasmodium species</li>
             <li><strong>Quantification:</strong> Parasite density calculation</li>
@@ -920,7 +906,7 @@
             <li><strong>Reporting:</strong> Generates standardized reports</li>
             <li><strong>Mobile compatible:</strong> Works with smartphone images</li>
           </ul>
-          
+         
           <div class="model-stats">
             <div class="stat-item">
               <div class="stat-value">95.2%</div>
@@ -939,19 +925,17 @@
               <div class="stat-label">Training Images</div>
             </div>
           </div>
-          
+         
           <p><strong>Best for:</strong> Areas with limited access to trained microscopists, field clinics, and malaria control programs.</p>
         </div>
       </div>
     </div>
   </div>
-
   <!-- Iframe container for loading model URLs -->
   <div id="iframeContainer">
     <button id="closeIframe">Close</button>
     <iframe id="modelFrame"></iframe>
   </div>
-
 <script type="module" src="script.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -961,7 +945,7 @@
         e.stopPropagation();
         const card = this.closest('.model-card');
         const aboutSection = card.querySelector('.model-about');
-        
+       
         // Close all other about sections first
         document.querySelectorAll('.model-about').forEach(section => {
           if (section !== aboutSection && section.style.display === 'block') {
@@ -970,25 +954,25 @@
             otherCard.querySelector('.about-button').textContent = 'About';
           }
         });
-        
+       
         // Toggle current about section
         aboutSection.style.display = aboutSection.style.display === 'block' ? 'none' : 'block';
         this.textContent = aboutSection.style.display === 'block' ? 'Hide Details' : 'About';
       });
     });
-    
+   
     // Handle close button in about sections
     document.querySelectorAll('.close-about').forEach(button => {
       button.addEventListener('click', function(e) {
         e.stopPropagation();
         const aboutSection = this.closest('.model-about');
         const aboutButton = aboutSection.closest('.model-card').querySelector('.about-button');
-        
+       
         aboutSection.style.display = 'none';
         aboutButton.textContent = 'About';
       });
     });
-    
+   
     // Close about sections when clicking outside
     document.addEventListener('click', function(e) {
       if (!e.target.closest('.model-about') && !e.target.closest('.about-button')) {
@@ -1001,10 +985,5 @@
     });
   });
 </script>
-
 </body>
 </html>
-
-
-
-
