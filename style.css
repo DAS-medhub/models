@@ -90,53 +90,44 @@ header {
   --model-color: #007BFF; /* Blue for diabetes */
   --model-color-light: #4FC3F7;
 }
-
 .model-card[data-model="dialarge"] {
   --model-color: #0056D2; /* Deeper blue for comprehensive diabetes */
   --model-color-light: #2196F3;
 }
-
 .model-card[data-model="dia18"] {
   --model-color: #0288D1; /* Mid-blue for 17 features diabetes */
   --model-color-light: #81D4FA;
 }
-
 .model-card[data-model="cancer"] {
- --model-color: #6A1B9A; /* Purple for general cancer */
+  --model-color: #6A1B9A; /* Purple for general cancer */
   --model-color-light: #BA68C8;
 }
-
 .model-card[data-model="tuberculosis"] {
   --model-color: #EF6C00; /* Orange for TB (respiratory) */
   --model-color-light: #FFB74D;
 }
-
 .model-card[data-model="pneumonia"] {
   --model-color: #D84315; /* Red-orange for pneumonia */
   --model-color-light: #FF8A65;
 }
-
 .model-card[data-model="heart"] {
   --model-color: #C62828; /* Red for heart disease */
   --model-color-light: #EF5350;
 }
-
 .model-card[data-model="breast"] {
- --model-color: #D81B60; /* Pink for breast cancer */
+  --model-color: #D81B60; /* Pink for breast cancer */
   --model-color-light: #F06292;
 }
-
 .model-card[data-model="malaria"] {
- --model-color: #F9A825; /* Yellow for malaria */
+  --model-color: #F9A825; /* Yellow for malaria */
   --model-color-light: #FFE082;
 }
-    .model-card[data-model="chest"] {
- --model-color: #BF360C; /* Deep orange for chest abnormalities */
+.model-card[data-model="chest"] {
+  --model-color: #BF360C; /* Deep orange for chest abnormalities */
   --model-color-light: #FF7043;
 }
-
 .model-card[data-model="microbiome"] {
- --model-color: #2E7D32; /* Keep green for microbiome */
+  --model-color: #2E7D32; /* Keep green for microbiome */
   --model-color-light: #66BB6A;
 }
 .model-icon {
@@ -162,9 +153,10 @@ header {
   padding: 8px 20px;
   border-radius: 10px;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, background 0.3s ease;
 }
 .access-button:hover {
+  background: linear-gradient(135deg, var(--model-color-light) 0%, var(--model-color) 100%);
   transform: scale(1.05);
 }
 /* Iframe container styles */
@@ -344,12 +336,10 @@ header {
   .cards-container {
     grid-template-columns: 1fr;
   }
- 
   .auth-form {
     width: 90%;
     max-width: 320px;
   }
- 
   .logo img {
     height: 36px;
     margin-right: 20px;
@@ -359,23 +349,19 @@ header {
   header {
     padding: 10px 15px;
   }
- 
   .auth-buttons button {
     padding: 6px 12px;
     font-size: 13px;
   }
- 
   .profile-icon {
     width: 32px;
     height: 32px;
     font-size: 14px;
   }
- 
   .logo img {
     height: 32px;
     margin-right: 15px;
   }
- 
   .dropdown-content {
     right: 10px;
     top: 40px;
@@ -405,11 +391,9 @@ header {
     width: 95%;
     padding: 20px 15px;
   }
- 
   .auth-form h2 {
     font-size: 1.3rem;
   }
- 
   .auth-form input {
     padding: 10px;
   }
@@ -420,19 +404,16 @@ header {
     align-items: flex-end;
     gap: 4px;
   }
- 
   .auth-buttons button {
     width: 80px;
     text-align: center;
     padding: 4px 8px;
     font-size: 12px;
   }
- 
   .user-dropdown {
     order: -1;
     margin-bottom: 4px;
   }
- 
   .logo img {
     height: 28px;
   }
