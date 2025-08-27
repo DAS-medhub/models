@@ -4,11 +4,9 @@
   box-sizing: border-box;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
 body {
   background-color: #f5f7fb;
 }
-
 header {
   display: flex;
   justify-content: space-between;
@@ -24,33 +22,28 @@ header {
   width: 100%;
   z-index: 1000;
 }
-
 .logo img {
   height: 42px;
   margin-right: 40px;
   transition: height 0.3s ease;
 }
-
 .navbar {
   background: linear-gradient(135deg, rgb(39, 145, 39) 0%, rgb(39, 145, 39) 100%);
   color: white;
   padding: 1.5rem 2rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
-
 .container {
   max-width: 1200px;
   margin: 80px auto 2rem auto;
   padding: 0 20px;
 }
-
 .search-bar {
   width: 100%;
   max-width: 500px;
   margin: 20px auto;
   position: relative;
 }
-
 .search-input {
   width: 100%;
   padding: 12px 20px;
@@ -59,20 +52,17 @@ header {
   font-size: 16px;
   transition: all 0.3s ease;
 }
-
 .search-input:focus {
   outline: none;
   border-color: rgb(39, 145, 39);
   box-shadow: 0 0 8px rgba(30, 60, 114, 0.2);
 }
-
 .cards-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   padding: 20px 0;
 }
-
 .model-card {
   background: white;
   border-radius: 15px;
@@ -82,12 +72,10 @@ header {
   position: relative;
   overflow: hidden;
 }
-
 .model-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
-
 .model-card::before {
   content: '';
   position: absolute;
@@ -95,30 +83,80 @@ header {
   left: 0;
   width: 100%;
   height: 4px;
-  background: linear-gradient(90deg, rgb(39, 145, 39) 0%, rgb(55, 155, 55) 100%);
+  background: linear-gradient(90deg, var(--model-color) 0%, var(--model-color-light) 100%);
+}
+/* Model-specific colors */
+.model-card[data-model="diabetes"] {
+  --model-color: #007BFF; /* Blue for diabetes */
+  --model-color-light: #4FC3F7;
 }
 
+.model-card[data-model="dialarge"] {
+  --model-color: #0056D2; /* Deeper blue for comprehensive diabetes */
+  --model-color-light: #2196F3;
+}
+
+.model-card[data-model="dia18"] {
+  --model-color: #0288D1; /* Mid-blue for 17 features diabetes */
+  --model-color-light: #81D4FA;
+}
+
+.model-card[data-model="cancer"] {
+ --model-color: #6A1B9A; /* Purple for general cancer */
+  --model-color-light: #BA68C8;
+}
+
+.model-card[data-model="tuberculosis"] {
+  --model-color: #EF6C00; /* Orange for TB (respiratory) */
+  --model-color-light: #FFB74D;
+}
+
+.model-card[data-model="pneumonia"] {
+  --model-color: #D84315; /* Red-orange for pneumonia */
+  --model-color-light: #FF8A65;
+}
+
+.model-card[data-model="heart"] {
+  --model-color: #C62828; /* Red for heart disease */
+  --model-color-light: #EF5350;
+}
+
+.model-card[data-model="breast"] {
+ --model-color: #D81B60; /* Pink for breast cancer */
+  --model-color-light: #F06292;
+}
+
+.model-card[data-model="malaria"] {
+ --model-color: #F9A825; /* Yellow for malaria */
+  --model-color-light: #FFE082;
+}
+    .model-card[data-model="chest"] {
+ --model-color: #BF360C; /* Deep orange for chest abnormalities */
+  --model-color-light: #FF7043;
+}
+
+.model-card[data-model="microbiome"] {
+ --model-color: #2E7D32; /* Keep green for microbiome */
+  --model-color-light: #66BB6A;
+}
 .model-icon {
   font-size: 2rem;
-  color: rgb(39, 145, 39);
+  color: var(--model-color);
   margin-bottom: 1rem;
 }
-
 .model-title {
-  color: rgb(39, 145, 39);
+  color: var(--model-color);
   margin-bottom: 0.75rem;
   font-size: 1.5rem;
 }
-
 .model-description {
   color: #666;
   font-size: 0.9rem;
   line-height: 1.5;
   margin-bottom: 1.5rem;
 }
-
 .access-button {
-  background: linear-gradient(135deg, rgb(179, 118, 5) 0%, orange 100%);
+  background: linear-gradient(135deg, var(--model-color) 0%, var(--model-color-light) 100%);
   color: white;
   border: none;
   padding: 8px 20px;
@@ -126,24 +164,20 @@ header {
   cursor: pointer;
   transition: transform 0.2s ease;
 }
-
 .access-button:hover {
   transform: scale(1.05);
 }
-
 /* Iframe container styles */
 #iframeContainer {
   display: none;
   position: relative;
   margin-top: 80px;
 }
-
 #iframeContainer iframe {
   width: 100%;
   height: calc(100vh - 80px);
   border: none;
 }
-
 #closeIframe {
   position: absolute;
   top: 10px;
@@ -157,14 +191,12 @@ header {
   color: white;
   font-size: 1rem;
 }
-
 /* Auth styles - Updated for better responsiveness */
 .auth-buttons {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-
 .auth-buttons button {
   background: linear-gradient(135deg, rgb(39, 145, 39) 0%, rgb(55, 155, 55) 100%);
   color: white;
@@ -176,11 +208,9 @@ header {
   white-space: nowrap;
   transition: transform 0.2s ease;
 }
-
 .auth-buttons button:hover {
   transform: scale(1.05);
 }
-
 .auth-modal {
   display: none;
   position: fixed;
@@ -193,7 +223,6 @@ header {
   justify-content: center;
   align-items: center;
 }
-
 .auth-form {
   background: white;
   padding: 30px;
@@ -202,13 +231,11 @@ header {
   width: 320px;
   position: relative;
 }
-
 .auth-form h2 {
   margin-bottom: 20px;
   color: rgb(39, 145, 39);
   text-align: center;
 }
-
 .auth-form input {
   width: 100%;
   padding: 12px;
@@ -218,12 +245,10 @@ header {
   font-size: 14px;
   transition: border-color 0.3s ease;
 }
-
 .auth-form input:focus {
   outline: none;
   border-color: rgb(39, 145, 39);
 }
-
 .auth-form button {
   background: linear-gradient(135deg, rgb(39, 145, 39) 0%, rgb(55, 155, 55) 100%);
   color: white;
@@ -236,24 +261,20 @@ header {
   margin-top: 5px;
   transition: transform 0.2s ease;
 }
-
 .auth-form button:hover {
   transform: scale(1.02);
 }
-
 .auth-form p {
   margin-top: 15px;
   text-align: center;
   font-size: 14px;
   color: #666;
 }
-
 .auth-form a {
   color: rgb(39, 145, 39);
   text-decoration: none;
   font-weight: bold;
 }
-
 .close-auth {
   position: absolute;
   top: 10px;
@@ -263,11 +284,9 @@ header {
   cursor: pointer;
   transition: color 0.2s ease;
 }
-
 .close-auth:hover {
   color: rgb(39, 145, 39);
 }
-
 /* Profile icon styles */
 .profile-icon {
   width: 36px;
@@ -285,7 +304,6 @@ header {
   display: none;
   cursor: pointer;
 }
-
 .dropdown-content {
   display: none;
   position: absolute;
@@ -299,7 +317,6 @@ header {
   cursor: pointer;
   transition: opacity 0.2s ease;
 }
-
 .dropdown-content::before {
   content: '';
   position: absolute;
@@ -309,7 +326,6 @@ header {
   border-right: 8px solid transparent;
   border-bottom: 8px solid white;
 }
-
 .dropdown-content a {
   color: #555;
   padding: 12px 16px;
@@ -317,60 +333,55 @@ header {
   display: block;
   transition: background-color 0.2s;
 }
-
 .dropdown-content a:hover {
   background-color: #f5f5f5;
 }
-
 .user-dropdown:hover .dropdown-content {
   display: block;
 }
-
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .cards-container {
     grid-template-columns: 1fr;
   }
-  
+ 
   .auth-form {
     width: 90%;
     max-width: 320px;
   }
-  
+ 
   .logo img {
     height: 36px;
     margin-right: 20px;
   }
 }
-
 @media (max-width: 480px) {
   header {
     padding: 10px 15px;
   }
-  
+ 
   .auth-buttons button {
     padding: 6px 12px;
     font-size: 13px;
   }
-  
+ 
   .profile-icon {
     width: 32px;
     height: 32px;
     font-size: 14px;
   }
-  
+ 
   .logo img {
     height: 32px;
     margin-right: 15px;
   }
-  
+ 
   .dropdown-content {
     right: 10px;
     top: 40px;
     min-width: 160px;
   }
 }
-
 .auth-message {
   padding: 12px;
   margin: 15px 0;
@@ -379,53 +390,49 @@ header {
   font-size: 14px;
   font-weight: 500;
 }
-
 .auth-message-error {
   background-color: #ffebee;
   color: #c62828;
   border: 1px solid #ef9a9a;
 }
-
 .auth-message-success {
   background-color: #e8f5e9;
   color: #2e7d32;
   border: 1px solid #a5d6a7;
 }
-
 @media (max-width: 400px) {
   .auth-form {
     width: 95%;
     padding: 20px 15px;
   }
-  
+ 
   .auth-form h2 {
     font-size: 1.3rem;
   }
-  
+ 
   .auth-form input {
     padding: 10px;
   }
 }
-
 @media (max-width: 350px) {
   .auth-buttons {
     flex-direction: column;
     align-items: flex-end;
     gap: 4px;
   }
-  
+ 
   .auth-buttons button {
     width: 80px;
     text-align: center;
     padding: 4px 8px;
     font-size: 12px;
   }
-  
+ 
   .user-dropdown {
     order: -1;
     margin-bottom: 4px;
   }
-  
+ 
   .logo img {
     height: 28px;
   }
