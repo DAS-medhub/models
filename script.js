@@ -1,4 +1,4 @@
-// Import Firebase SDKs
+// Import Firebase SDKs - UPDATED IMPORTS
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
 import { 
   getAuth, 
@@ -7,8 +7,14 @@ import {
   signOut, 
   onAuthStateChanged,
   setPersistence,
-  browserLocalPersistence
+  browserLocalPersistence,
+  sendPasswordResetEmail,
+  GoogleAuthProvider,
+  signInWithPopup
 } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+
+// Initialise Goggle
+const googleProvider = new GoogleAuthProvider();
 
 // Firebase configuration
 const firebaseConfig = {
@@ -126,6 +132,101 @@ function getInitial(email) {
 }
 
 // Event Listeners
+
+// Add event listeners for the new elements
+document.getElementById("forgot-password-link").addEventListener("click", (e) => {
+  e.preventDefault();
+  loginForm.style.display = "none";
+  document.getElementById("forgot-password-form").style.display = "block";
+});
+
+document.getElementById("back-to-login").addEventListener("click", (e) => {
+  e.preventDefault();
+  document.getElementById("forgot-password-form").style.display = "none";
+  loginForm.style.display = "block";
+});
+
+// Google Sign-In
+document.getElementById("google-login").addEventListener("click", signInWithGoogle);
+document.getElementById("google-signup").addEventListener("click", signInWithGoogle);
+
+// Password Reset
+document.getElementById("reset-password-submit").addEventListener("click", handlePasswordReset);
+
+/**
+ * Sign in with Google
+ */
+async function signInWithGoogle() {
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    // This gives you a Google Access Token for accessing Google API
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    
+    authModal.style.display = "none";
+    
+    const requestedModel = localStorage.getItem('requestedModel');
+    if (requestedModel) {
+      showAuthMessage(`Welcome! Redirecting to model...`, "success");
+      setTimeout(() => {
+        loadModel(requestedModel);
+        localStorage.removeItem('requestedModel');
+      }, 1500);
+    }
+  } catch (error) {
+    let errorMessage;
+    switch (error.code) {
+      case 'auth/popup-closed-by-user':
+        errorMessage = "Sign-in was canceled";
+        break;
+      case 'auth/popup-blocked':
+        errorMessage = "Popup was blocked by your browser. Please allow popups for this site";
+        break;
+      default:
+        errorMessage = "Google sign-in failed. Please try again";
+    }
+    showAuthMessage(errorMessage, "error");
+  }
+}
+
+/**
+ * Handle password reset
+ */
+async function handlePasswordReset() {
+  const email = document.getElementById("reset-email").value.trim();
+  
+  if (!email) {
+    showAuthMessage("Please enter your email address", "error");
+    return;
+  }
+  
+  try {
+    await sendPasswordResetEmail(auth, email);
+    showAuthMessage("Password reset email sent! Check your inbox", "success");
+    
+    // Clear the field
+    document.getElementById("reset-email").value = "";
+    
+    // Return to login after a delay
+    setTimeout(() => {
+      document.getElementById("forgot-password-form").style.display = "none";
+      loginForm.style.display = "block";
+    }, 3000);
+  } catch (error) {
+    let errorMessage;
+    switch (error.code) {
+      case 'auth/invalid-email':
+        errorMessage = "Please enter a valid email address";
+        break;
+      case 'auth/user-not-found':
+        errorMessage = "No account found with this email";
+        break;
+      default:
+        errorMessage = "Failed to send reset email. Please try again";
+    }
+    showAuthMessage(errorMessage, "error");
+  }
+}
 
 // Show Login Modal
 loginButton.addEventListener("click", () => {
