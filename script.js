@@ -13,7 +13,7 @@ import {
   signInWithPopup
 } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 
-// Initialise Goggle
+// Initialize Google
 const googleProvider = new GoogleAuthProvider();
 
 // Firebase configuration
@@ -42,6 +42,7 @@ setPersistence(auth, browserLocalPersistence)
 const authModal = document.getElementById("auth-modal");
 const loginForm = document.getElementById("login-form");
 const signupForm = document.getElementById("signup-form");
+const forgotPasswordForm = document.getElementById("forgot-password-form");
 const loginButton = document.getElementById("login-button");
 const signupButton = document.getElementById("signup-button");
 const userDropdown = document.querySelector(".user-dropdown");
@@ -49,6 +50,15 @@ const profileIcon = document.getElementById("profile-icon");
 const logoutLink = document.getElementById("logout-link");
 const accountLink = document.getElementById("account-link");
 const closeButtons = document.querySelectorAll(".close-auth");
+const forgotPasswordLink = document.getElementById("forgot-password-link");
+const backToLoginLink = document.getElementById("back-to-login");
+const googleLoginButton = document.getElementById("google-login");
+const googleSignupButton = document.getElementById("google-signup");
+const resetPasswordSubmit = document.getElementById("reset-password-submit");
+const switchToSignupLink = document.getElementById("switch-to-signup");
+const switchToLoginLink = document.getElementById("switch-to-login");
+const loginSubmitButton = document.getElementById("login-submit");
+const signupSubmitButton = document.getElementById("signup-submit");
 
 // Model URLs configuration
 const modelUrls = {
@@ -131,28 +141,6 @@ function getInitial(email) {
   return email.charAt(0).toUpperCase();
 }
 
-// Event Listeners
-
-// Add event listeners for the new elements
-document.getElementById("forgot-password-link").addEventListener("click", (e) => {
-  e.preventDefault();
-  loginForm.style.display = "none";
-  document.getElementById("forgot-password-form").style.display = "block";
-});
-
-document.getElementById("back-to-login").addEventListener("click", (e) => {
-  e.preventDefault();
-  document.getElementById("forgot-password-form").style.display = "none";
-  loginForm.style.display = "block";
-});
-
-// Google Sign-In
-document.getElementById("google-login").addEventListener("click", signInWithGoogle);
-document.getElementById("google-signup").addEventListener("click", signInWithGoogle);
-
-// Password Reset
-document.getElementById("reset-password-submit").addEventListener("click", handlePasswordReset);
-
 /**
  * Sign in with Google
  */
@@ -209,7 +197,7 @@ async function handlePasswordReset() {
     
     // Return to login after a delay
     setTimeout(() => {
-      document.getElementById("forgot-password-form").style.display = "none";
+      forgotPasswordForm.style.display = "none";
       loginForm.style.display = "block";
     }, 3000);
   } catch (error) {
@@ -228,11 +216,14 @@ async function handlePasswordReset() {
   }
 }
 
+// Event Listeners
+
 // Show Login Modal
 loginButton.addEventListener("click", () => {
   authModal.style.display = "flex";
   loginForm.style.display = "block";
   signupForm.style.display = "none";
+  forgotPasswordForm.style.display = "none";
   document.getElementById("login-email").focus();
 });
 
@@ -241,6 +232,7 @@ signupButton.addEventListener("click", () => {
   authModal.style.display = "flex";
   signupForm.style.display = "block";
   loginForm.style.display = "none";
+  forgotPasswordForm.style.display = "none";
   document.getElementById("signup-email").focus();
 });
 
@@ -262,15 +254,36 @@ window.addEventListener("click", (event) => {
   }
 });
 
+// Forgot password link
+forgotPasswordLink.addEventListener("click", (e) => {
+  e.preventDefault();
+  loginForm.style.display = "none";
+  forgotPasswordForm.style.display = "block";
+});
+
+// Back to login from forgot password
+backToLoginLink.addEventListener("click", (e) => {
+  e.preventDefault();
+  forgotPasswordForm.style.display = "none";
+  loginForm.style.display = "block";
+});
+
+// Google Sign-In
+googleLoginButton.addEventListener("click", signInWithGoogle);
+googleSignupButton.addEventListener("click", signInWithGoogle);
+
+// Password Reset
+resetPasswordSubmit.addEventListener("click", handlePasswordReset);
+
 // Switch between forms
-document.getElementById("switch-to-signup").addEventListener("click", (e) => {
+switchToSignupLink.addEventListener("click", (e) => {
   e.preventDefault();
   loginForm.style.display = "none";
   signupForm.style.display = "block";
   document.getElementById("signup-email").focus();
 });
 
-document.getElementById("switch-to-login").addEventListener("click", (e) => {
+switchToLoginLink.addEventListener("click", (e) => {
   e.preventDefault();
   signupForm.style.display = "none";
   loginForm.style.display = "block";
@@ -289,6 +302,7 @@ document.querySelectorAll('.model-card').forEach(card => {
       authModal.style.display = "flex";
       loginForm.style.display = "block";
       signupForm.style.display = "none";
+      forgotPasswordForm.style.display = "none";
       localStorage.setItem('requestedModel', model);
       showAuthMessage("Please sign in to access medical AI models", "error");
     }
@@ -305,7 +319,7 @@ document.getElementById('closeIframe').addEventListener('click', function() {
 });
 
 // Login form submission
-document.getElementById("login-submit").addEventListener("click", async (e) => {
+loginSubmitButton.addEventListener("click", async (e) => {
   e.preventDefault();
   const email = document.getElementById("login-email").value.trim();
   const password = document.getElementById("login-password").value.trim();
@@ -357,7 +371,7 @@ document.getElementById("login-submit").addEventListener("click", async (e) => {
 });
 
 // Signup form submission
-document.getElementById("signup-submit").addEventListener("click", async (e) => {
+signupSubmitButton.addEventListener("click", async (e) => {
   e.preventDefault();
   const email = document.getElementById("signup-email").value.trim();
   const password = document.getElementById("signup-password").value.trim();
@@ -464,6 +478,7 @@ onAuthStateChanged(auth, (user) => {
       authModal.style.display = "flex";
       loginForm.style.display = "block";
       signupForm.style.display = "none";
+      forgotPasswordForm.style.display = "none";
       showAuthMessage("Please sign in to access this medical model", "error");
     }
   }
