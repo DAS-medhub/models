@@ -331,6 +331,72 @@ header {
 .user-dropdown:hover .dropdown-content {
   display: block;
 }
+/* Google Auth Button Styles */
+.google-auth-btn {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: white;
+  color: #555;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  margin-bottom: 15px;
+}
+
+.google-auth-btn:hover {
+  background-color: #f5f5f5;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.google-auth-btn i {
+  color: #DB4437;
+}
+
+/* Divider Styles */
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  color: #777;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #ddd;
+}
+
+.divider span {
+  padding: 0 10px;
+  font-size: 14px;
+}
+
+/* Forgot Password Link */
+.forgot-password {
+  text-align: right;
+  margin: -10px 0 15px 0;
+}
+
+.forgot-password a {
+  color: #666;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.forgot-password a:hover {
+  color: rgb(39, 145, 39);
+  text-decoration: underline;
+}
+
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .cards-container {
