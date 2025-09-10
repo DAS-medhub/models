@@ -340,7 +340,7 @@
       <button id="signup-button">Sign Up</button>
     </div>
   </header>
-  <!-- Auth Modal -->
+  <!-- Auth Modal - UPDATED SECTION -->
   <div class="auth-modal" id="auth-modal">
     <!-- Login Form -->
     <div class="auth-form" id="login-form">
@@ -349,8 +349,26 @@
       <input type="email" id="login-email" placeholder="Email" required>
       <input type="password" id="login-password" placeholder="Password" required>
       <button id="login-submit">Login</button>
+      
+      <!-- Forgot password link -->
+      <p class="forgot-password">
+        <a href="#" id="forgot-password-link">Forgot password?</a>
+      </p>
+      
+      <!-- Divider -->
+      <div class="divider">
+        <span>or</span>
+      </div>
+      
+      <!-- Google Sign-In Button -->
+      <button id="google-login" class="google-auth-btn">
+        <i class="fab fa-google"></i>
+        Continue with Google
+      </button>
+      
       <p>Don't have an account? <a href="#" id="switch-to-signup">Sign Up</a></p>
     </div>
+    
     <!-- Signup Form -->
     <div class="auth-form" id="signup-form" style="display: none;">
       <span class="close-auth">&times;</span>
@@ -358,7 +376,29 @@
       <input type="email" id="signup-email" placeholder="Email" required>
       <input type="password" id="signup-password" placeholder="Password" required>
       <button id="signup-submit">Sign Up</button>
+      
+      <!-- Divider -->
+      <div class="divider">
+        <span>or</span>
+      </div>
+      
+      <!-- Google Sign-Up Button -->
+      <button id="google-signup" class="google-auth-btn">
+        <i class="fab fa-google"></i>
+        Continue with Google
+      </button>
+      
       <p>Already have an account? <a href="#" id="switch-to-login">Login</a></p>
+    </div>
+    
+    <!-- Forgot Password Form -->
+    <div class="auth-form" id="forgot-password-form" style="display: none;">
+      <span class="close-auth">&times;</span>
+      <h2>Reset Password</h2>
+      <p>Enter your email address and we'll send you a link to reset your password.</p>
+      <input type="email" id="reset-email" placeholder="Email" required>
+      <button id="reset-password-submit">Send Reset Link</button>
+      <p>Remember your password? <a href="#" id="back-to-login">Back to Login</a></p>
     </div>
   </div>
   <!-- Main content container for search and cards -->
@@ -989,5 +1029,6 @@
 </script>
 </body>
 </html>
+
 
 
