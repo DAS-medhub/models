@@ -79,7 +79,12 @@
      --model-color: #BF360C; /* Deep orange for chest abnormalities */
       --model-color-light: #FF7043;
     }
-   
+    
+.model-card[data-model="clinical-prediction"] {
+     --model-color: #33d483; /* Deep orange for chest abnormalities */
+      --model-color-light: #FF7043;
+    }
+    
     .model-card[data-model="microbiome"] {
      --model-color: #2E7D32; /* Keep green for microbiome */
       --model-color-light: #66BB6A;
@@ -583,6 +588,56 @@
         <p><strong>Advantage:</strong> Provides rapid, accurate detection of multiple abnormalities with a user-friendly interface for radiologists and clinicians.</p>
     </div>
 </div>
+
+<!-- Clinical Prediction Suite Model Card -->
+<div class="model-card" data-model="clinical-prediction">
+  <i class="fas fa-heartbeat model-icon"></i>
+  <h2 class="model-title">Clinical Prediction Suite</h2>
+  <p class="model-description">
+    AI-powered clinical decision support system for early risk assessment of Type 2 Diabetes and Heart Disease using patient demographics, lifestyle, and lab data.
+  </p>
+  <div class="model-buttons">
+    <button class="model-button access-button"><u>Access Model</u></button>
+    <button class="model-button about-button">About</button>
+  </div>
+  <div class="model-about">
+    <span class="close-about">&times;</span>
+    <h3><i class="fas fa-info-circle"></i> About Clinical Prediction Suite</h3>
+    <p>This integrated suite leverages three specialized deep learning models for diabetes and one for heart disease, enabling early, data-driven risk stratification using real-world clinical variables.</p>
+    
+    <ul class="features-list">
+      <li><strong>Diabetes Models:</strong> 8-feature (basic), 17-feature (intermediate), and 43-feature (comprehensive) variants for adaptive prediction</li>
+      <li><strong>Heart Disease Model:</strong> 11-feature model based on AHA/ACC clinical guidelines</li>
+      <li><strong>Input Types:</strong> Demographics (age, sex), vitals (BP, BMI), lifestyle (smoking, activity), and lab values (HbA1c, glucose, cholesterol)</li>
+      <li><strong>Smart Selection:</strong> Automatically selects the most appropriate diabetes model based on available data</li>
+      <li><strong>Interpretable Output:</strong> Risk category (Low/Moderate/High), confidence score, and actionable insights</li>
+      <li><strong>Clinical Safety:</strong> Enforces minimum required predictors to prevent unreliable predictions</li>
+    </ul>
+    
+    <div class="model-stats">
+      <div class="stat-item">
+        <div class="stat-value">91–96%</div>
+        <div class="stat-label">Model Accuracy</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">89%</div>
+        <div class="stat-label">Avg Sensitivity</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">93%</div>
+        <div class="stat-label">Avg Specificity</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">100K+</div>
+        <div class="stat-label">Training Records</div>
+      </div>
+    </div>
+    
+    <p><strong>Best for:</strong> Primary care screening, preventive health programs, telemedicine triage, and chronic disease risk monitoring.</p>
+    <p><strong>Output includes:</strong> Diagnosis class (e.g., "Prediabetic", "Heart Disease"), confidence %, risk level, and exportable clinical reports (PDF/CSV).</p>
+  </div>
+</div>
+      
       
       <!-- Diabetes Model Card -->
       <div class="model-card" data-model="diabetes">
@@ -1034,6 +1089,7 @@
 </script>
 </body>
 </html>
+
 
 
 
