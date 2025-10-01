@@ -69,6 +69,7 @@ const modelUrls = {
   heart: 'https://sebukpor.github.io/heart-diseases-prediction/',
   breast: 'https://sebukpor.github.io/breast-cancer-classification/',
   malaria: 'https://sebukpor.github.io/malaria-classification/',
+  clinical: 'https://das-medhub.github.io/diagnostic-models/',
   chest:'https://das-medhub.github.io/Chest-expert/',
   dialarge: 'https://sebukpor.github.io/Diabetes-large-input/',
   microbiome:'https://das-medhub.github.io/microbiome-sample-origin-predictor/',
