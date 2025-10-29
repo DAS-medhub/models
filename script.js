@@ -63,7 +63,7 @@ const signupSubmitButton = document.getElementById("signup-submit");
 // Model URLs configuration
 const modelUrls = {
   diabetes: 'https://sebukpor.github.io/Diabetes-classification/',
-  cancer: 'https://sebukpor.github.io/multi-cancer-classification/',
+  cancer: 'https://das-medhub.github.io/multi-cancer-classification-Xception/',
   tuberculosis: 'https://sebukpor.github.io/tuberculosis_classification/',
   pneumonia: 'https://sebukpor.github.io/pneumonia/',
   heart: 'https://sebukpor.github.io/heart-diseases-prediction/',
